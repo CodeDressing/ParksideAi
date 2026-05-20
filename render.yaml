@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: parksideai
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn run:app
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4.1-mini
+      - key: FLASK_DEBUG
+        value: False
+      - key: APP_NAME
+        value: ParksideAI
+      - key: RESTAURANT_NAME
+        value: Parkside Tavern
