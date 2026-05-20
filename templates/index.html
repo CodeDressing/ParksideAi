@@ -1,57 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- =======================================================
+         ParksideAI
+         Phase 3 Template Upgrade
+         ======================================================= -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ParksideAI</title>
 
+    <title>ParksideAI | Parkside Tavern Hospitality Assistant</title>
+
+    <meta
+        name="description"
+        content="ParksideAI helps guests find official Parkside Tavern information, including reservations, private events, menus, drinks, brunch, hours, and Morristown restaurant details."
+    >
+
+    <meta
+        name="keywords"
+        content="Parkside Tavern, ParksideAI, Morristown restaurant, Morristown tavern, Morristown cocktail bar, Parkside Tavern reservations, Parkside Tavern private events, brunch Morristown, happy hour Morristown"
+    >
+
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="ParksideAI">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="ParksideAI | Parkside Tavern Hospitality Assistant">
+    <meta property="og:description" content="Find official Parkside Tavern information and get routed to reservations, private events, menus, and more.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://parksidenj.com/">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://parksidenj.com/">
+
+    <!-- Styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
 
-<div class="hero">
+<main class="hero" aria-labelledby="page-title">
 
-    <h1>ParksideAI</h1>
+    <h1 id="page-title">ParksideAI</h1>
 
     <p>
-        AI-Powered Restaurant SEO & Customer Engagement System
+        A hospitality assistant for Parkside Tavern, built to help guests find
+        official restaurant information and route them to the right place for
+        reservations, private events, menus, drinks, brunch, and more.
     </p>
 
-    <button id="open-chat">
+    <p class="subtext">
+        ParksideAI does not take reservations directly or collect guest personal
+        information. It guides guests to official Parkside Tavern links.
+    </p>
+
+    <button id="open-chat" type="button" aria-controls="chat-container">
         Open AI Assistant
     </button>
 
-</div>
+</main>
 
-<div class="chat-container" id="chat-container">
+
+<section
+    class="chat-container"
+    id="chat-container"
+    aria-label="ParksideAI chat assistant"
+>
 
     <div class="chat-header">
         ParksideAI Assistant
     </div>
 
-    <div class="chat-messages" id="chat-messages">
-
+    <div
+        class="chat-messages"
+        id="chat-messages"
+        aria-live="polite"
+        aria-atomic="false"
+    >
         <div class="bot-message">
-            Hello! How can I help you today?
+            Welcome to ParksideAI. I can help you find official Parkside Tavern
+            information and route you to reservations, private events, menus,
+            hours, drinks, brunch, and more.
         </div>
-
     </div>
 
     <div class="chat-input-area">
 
+        <label for="user-input" class="screen-reader-only">
+            Ask ParksideAI a question
+        </label>
+
         <input
-                type="text"
-                id="user-input"
-                placeholder="Ask something..."
+            type="text"
+            id="user-input"
+            placeholder="Ask about reservations, menus, private events..."
+            autocomplete="off"
+            maxlength="1200"
         >
 
-        <button id="send-button">
+        <button id="send-button" type="button">
             Send
         </button>
 
     </div>
 
-</div>
+</section>
+
+
+<noscript>
+    <div style="padding: 20px; text-align: center;">
+        ParksideAI requires JavaScript for the chat assistant. For official
+        Parkside Tavern information, please visit
+        <a href="https://parksidenj.com/">parksidenj.com</a>.
+    </div>
+</noscript>
+
 
 <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
 
