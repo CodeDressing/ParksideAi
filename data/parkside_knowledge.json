@@ -1,0 +1,135 @@
+{
+  "source_policy": {
+    "primary_source": "https://parksidenj.com/",
+    "rule": "Use the official Parkside Tavern website as the primary source of truth for restaurant details. Do not invent hours, prices, menu items, event policies, availability, or contact information."
+  },
+  "restaurant": {
+    "name": "Parkside Tavern",
+    "description": "Old world tavern and cocktail bar located in Headquarters Plaza.",
+    "location": {
+      "street": "9 Speedwell Ave",
+      "city": "Morristown",
+      "state": "NJ",
+      "zip": "07960"
+    },
+    "phone": "(973)-425-5590",
+    "email": "hqhospitalitynj@gmail.com",
+    "hours": {
+      "days": "Sunday through Saturday",
+      "open": "12:00 PM",
+      "close": "12:00 AM"
+    }
+  },
+  "links": {
+    "menu": "https://parksidenj.com/morristown-morristown-parkside-tavern-food-menu",
+    "drinks": "https://parksidenj.com/morristown-morristown-parkside-tavern-drink-menu",
+    "private_events": "https://parksidetavern.tripleseat.com/party_request/45075",
+    "reservations": "OpenTable link from official website"
+  },
+  "core_positioning": [
+    "Morristown tavern",
+    "cocktail bar",
+    "restaurant",
+    "private event destination",
+    "groups and parties venue",
+    "live music and entertainment venue"
+  ],
+  "private_events": {
+    "summary": "Parkside Tavern promotes groups, parties, catering, and private event inquiries.",
+    "event_examples": [
+      "baby showers",
+      "graduations",
+      "retirements",
+      "special events",
+      "parties",
+      "catering for big and small events"
+    ],
+    "lead_capture_fields": [
+      "name",
+      "phone",
+      "email",
+      "preferred date",
+      "guest count",
+      "event type",
+      "notes"
+    ],
+    "safe_response": "Parkside Tavern hosts events and parties. For exact availability, pricing, minimums, and package details, guests should contact the restaurant or submit a private event inquiry."
+  },
+  "menu_highlights": {
+    "menu_sections": [
+      "Lunch Menu",
+      "Dinner Menu",
+      "Happy Hour Menu",
+      "Sides",
+      "Kids Menu",
+      "Brunch"
+    ],
+    "dietary_notes": [
+      "Guests should advise their server of allergies.",
+      "Not all ingredients are listed on the menu.",
+      "Menu identifies vegetarian and gluten-free items."
+    ],
+    "sample_items": [
+      "Blistered Shishito Peppers",
+      "Colossal Shrimp Cocktail",
+      "Skirt Steak Tacos",
+      "Spicy Salmon Poke Tostada",
+      "French Onion Soup",
+      "Short Rib Nachos",
+      "Lobster Bao Buns",
+      "Buffalo Wings",
+      "Tavern Burger",
+      "Miso Salmon",
+      "Prime NY Strip",
+      "Maryland Crab Cake",
+      "Mushroom Carbonara",
+      "French Dip Sandwich",
+      "Kids Rigatoni",
+      "Chicken Fingers & Fries",
+      "Brunch Burger",
+      "Crab Benedict",
+      "Shrimp & Grits",
+      "Steak & Eggs"
+    ]
+  },
+  "drink_highlights": {
+    "sections": [
+      "Beer",
+      "Wines",
+      "Cocktails",
+      "Spirits"
+    ],
+    "sample_beer": [
+      "Peroni Lager",
+      "Narragansett American Lager",
+      "Allagash White",
+      "Sloop Juice Bomb",
+      "La Chouffe Golden Ale",
+      "Maine Beer Company Lunch IPA",
+      "Guinness Draught",
+      "Modelo Especial",
+      "Miller Lite",
+      "Athletic Brewing Company Hazy IPA"
+    ]
+  },
+  "chatbot_rules": [
+    "Answer using the official website facts first.",
+    "If unsure, do not guess.",
+    "For private events, collect lead details.",
+    "For reservations, direct guests toward the reservation link or calling the restaurant.",
+    "For allergies, advise guests to notify their server and avoid guaranteeing allergen safety.",
+    "For menu questions, mention that menu items may change and guests should verify with the restaurant."
+  ],
+  "seo_targets": [
+    "Parkside Tavern Morristown",
+    "Morristown tavern",
+    "Morristown cocktail bar",
+    "private events Morristown NJ",
+    "birthday party restaurant Morristown",
+    "corporate events Morristown",
+    "brunch Morristown",
+    "happy hour Morristown",
+    "cocktails Morristown",
+    "restaurant near Headquarters Plaza"
+  ]
+}

@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5020dba6-25cf-49db-a604-6f9fb6dc94ed" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/data/parkside_knowledge.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/render.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/render.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parkside_chatbot/prompts.py" beforeDir="false" afterPath="$PROJECT_DIR$/parkside_chatbot/prompts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/chat_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/chat_routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/lead_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/lead_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/openai_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/openai_service.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
