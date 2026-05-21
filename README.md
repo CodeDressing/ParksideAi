@@ -1,6 +1,6 @@
 # ParksideAI
 
-AI-powered hospitality assistant for Parkside Tavern in Morristown, NJ.
+AI-powered SEO & hospitality assistant for Parkside Tavern in Morristown, NJ.
 
 ## Core Principles
 
