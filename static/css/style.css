@@ -818,7 +818,21 @@ button:hover,
     color:
         var(--text-soft);
 }
+/* =========================================================
+   CHAT OPEN/CLOSE STATES
+========================================================= */
 
+.chat-open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.chat-closed {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(30px);
+}
 /* =========================================================
    FOOTER
 ========================================================= */

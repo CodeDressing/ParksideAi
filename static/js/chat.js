@@ -127,6 +127,10 @@ function bindCoreEvents() {
    SECTION 6 — CHAT OPEN/CLOSE
 ======================================================== */
 
+/* ========================================================
+   SECTION 6 — CHAT OPEN/CLOSE
+======================================================== */
+
 function toggleChat() {
 
     if (!chatContainer) {
@@ -138,39 +142,57 @@ function toggleChat() {
 
     if (CHAT_STATE.isOpen) {
 
-        chatContainer.style.display =
-            "flex";
-
-        if (openChatButton) {
-            openChatButton.innerText =
-                "Close AI Assistant";
-        }
-
-        focusInput();
+        openChat();
 
     } else {
 
-        chatContainer.style.display =
-            "none";
-
-        if (openChatButton) {
-            openChatButton.innerText =
-                "Open AI Assistant";
-        }
+        closeChat();
     }
 }
 
-function focusInput() {
 
-    if (!userInput) {
-        return;
+function openChat() {
+
+    CHAT_STATE.isOpen = true;
+
+    chatContainer.classList.add(
+        "chat-open"
+    );
+
+    chatContainer.classList.remove(
+        "chat-closed"
+    );
+
+    if (openChatButton) {
+
+        openChatButton.innerText =
+            "Close AI Assistant";
     }
 
-    setTimeout(() => {
-        userInput.focus();
-    }, 100);
+    focusInput();
+
+    scrollToBottom();
 }
 
+
+function closeChat() {
+
+    CHAT_STATE.isOpen = false;
+
+    chatContainer.classList.remove(
+        "chat-open"
+    );
+
+    chatContainer.classList.add(
+        "chat-closed"
+    );
+
+    if (openChatButton) {
+
+        openChatButton.innerText =
+            "Open AI Assistant";
+    }
+}
 
 /* ========================================================
    SECTION 7 — WELCOME STATE
