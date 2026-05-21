@@ -3,60 +3,260 @@
 <head>
     <!-- =======================================================
          ParksideAI
-         Phase 3 Template Upgrade
+         Phase 5 Part 1.0 Homepage Upgrade
          ======================================================= -->
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ParksideAI | Parkside Tavern Hospitality Assistant</title>
+    <title>ParksideAI | Parkside Tavern Hospitality & SEO Assistant</title>
 
     <meta
         name="description"
-        content="ParksideAI helps guests find official Parkside Tavern information, including reservations, private events, menus, drinks, brunch, hours, and Morristown restaurant details."
+        content="ParksideAI helps guests find official Parkside Tavern information, including reservations, private events, menus, drinks, brunch, happy hour, and Morristown restaurant details."
     >
 
     <meta
         name="keywords"
-        content="Parkside Tavern, ParksideAI, Morristown restaurant, Morristown tavern, Morristown cocktail bar, Parkside Tavern reservations, Parkside Tavern private events, brunch Morristown, happy hour Morristown"
+        content="Parkside Tavern, ParksideAI, Morristown restaurant, Morristown tavern, Morristown cocktail bar, Parkside Tavern reservations, Parkside Tavern private events, brunch Morristown, happy hour Morristown, cocktails Morristown"
     >
 
     <meta name="robots" content="index, follow">
     <meta name="author" content="ParksideAI">
 
-    <!-- Open Graph -->
     <meta property="og:title" content="ParksideAI | Parkside Tavern Hospitality Assistant">
     <meta property="og:description" content="Find official Parkside Tavern information and get routed to reservations, private events, menus, and more.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://parksidenj.com/">
 
-    <!-- Canonical -->
     <link rel="canonical" href="https://parksidenj.com/">
-
-    <!-- Styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
 
-<main class="hero" aria-labelledby="page-title">
+<header class="site-header">
+    <a class="site-logo" href="/">
+        ParksideAI
+    </a>
 
-    <h1 id="page-title">ParksideAI</h1>
+    <nav class="site-nav" aria-label="Primary navigation">
+        <a href="https://parksidenj.com/" target="_blank" rel="noopener noreferrer">
+            Official Website
+        </a>
 
-    <p>
-        A hospitality assistant for Parkside Tavern, built to help guests find
-        official restaurant information and route them to the right place for
-        reservations, private events, menus, drinks, brunch, and more.
-    </p>
+        <a href="https://www.opentable.com/r/parkside-tavern-morristown" target="_blank" rel="noopener noreferrer">
+            Reservations
+        </a>
 
-    <p class="subtext">
-        ParksideAI does not take reservations directly or collect guest personal
-        information. It guides guests to official Parkside Tavern links.
-    </p>
+        <a href="https://parksidetavern.tripleseat.com/party_request/45075" target="_blank" rel="noopener noreferrer">
+            Private Events
+        </a>
 
-    <button id="open-chat" type="button" aria-controls="chat-container">
-        Open AI Assistant
-    </button>
+        <a href="/seo/">
+            SEO Pages
+        </a>
+    </nav>
+</header>
+
+
+<main>
+
+    <section class="hero" aria-labelledby="page-title">
+
+        <p class="hero-eyebrow">
+            Parkside Tavern • Morristown NJ
+        </p>
+
+        <h1 id="page-title">
+            ParksideAI
+        </h1>
+
+        <p class="hero-lead">
+            A hospitality assistant for Parkside Tavern, built to help guests find
+            official restaurant information and route them to the right place for
+            reservations, private events, menus, drinks, brunch, happy hour, and more.
+        </p>
+
+        <p class="subtext">
+            ParksideAI does not take reservations directly or collect guest personal
+            information. It guides guests to official Parkside Tavern links.
+        </p>
+
+        <div class="hero-actions">
+            <button id="open-chat" type="button" aria-controls="chat-container">
+                Open AI Assistant
+            </button>
+
+            <a
+                class="button-like secondary-button"
+                href="https://parksidenj.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Visit Parkside Tavern
+            </a>
+        </div>
+
+    </section>
+
+
+    <section class="homepage-section" aria-labelledby="official-links-title">
+
+        <div class="section-heading">
+            <p class="section-eyebrow">Official Routing</p>
+            <h2 id="official-links-title">Get to the right Parkside Tavern destination</h2>
+            <p>
+                ParksideAI is designed to guide guests to official Parkside Tavern platforms,
+                not replace them.
+            </p>
+        </div>
+
+        <div class="action-card-grid">
+
+            <a
+                class="action-card"
+                href="https://www.opentable.com/r/parkside-tavern-morristown"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <span>Reservations</span>
+                <strong>Book on OpenTable</strong>
+                <p>Use the official OpenTable page for Parkside Tavern reservations.</p>
+            </a>
+
+            <a
+                class="action-card"
+                href="https://parksidetavern.tripleseat.com/party_request/45075"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <span>Private Events</span>
+                <strong>Submit Event Inquiry</strong>
+                <p>Use the official Tripleseat form for parties, events, and group inquiries.</p>
+            </a>
+
+            <a
+                class="action-card"
+                href="https://parksidenj.com/morristown-morristown-parkside-tavern-food-menu"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <span>Menus</span>
+                <strong>View Food Menu</strong>
+                <p>Explore official food menu information through Parkside Tavern.</p>
+            </a>
+
+            <a
+                class="action-card"
+                href="https://parksidenj.com/morristown-morristown-parkside-tavern-drink-menu"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <span>Drinks</span>
+                <strong>View Drink Menu</strong>
+                <p>Find cocktails, beer, wine, spirits, and current drink information.</p>
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <section class="homepage-section alt-section" aria-labelledby="seo-pages-title">
+
+        <div class="section-heading">
+            <p class="section-eyebrow">Local SEO Engine</p>
+            <h2 id="seo-pages-title">Parkside Tavern discovery pages</h2>
+            <p>
+                Phase 5 connects the public homepage to SEO-focused pages for Morristown
+                dining, events, brunch, cocktails, and group occasions.
+            </p>
+        </div>
+
+        <div class="seo-card-grid">
+
+            <a class="seo-home-card" href="/seo/private-events">
+                <h3>Private Events</h3>
+                <p>Private events in Morristown at Parkside Tavern.</p>
+            </a>
+
+            <a class="seo-home-card" href="/seo/birthday-parties">
+                <h3>Birthday Parties</h3>
+                <p>Birthday party restaurant and celebration routing.</p>
+            </a>
+
+            <a class="seo-home-card" href="/seo/corporate-events">
+                <h3>Corporate Events</h3>
+                <p>Corporate gatherings and business event discovery.</p>
+            </a>
+
+            <a class="seo-home-card" href="/seo/holiday-parties">
+                <h3>Holiday Parties</h3>
+                <p>Holiday party venue discovery for Morristown guests.</p>
+            </a>
+
+            <a class="seo-home-card" href="/seo/brunch">
+                <h3>Brunch</h3>
+                <p>Brunch in Morristown with Parkside Tavern context.</p>
+            </a>
+
+            <a class="seo-home-card" href="/seo/happy-hour">
+                <h3>Happy Hour</h3>
+                <p>Happy hour and cocktail discovery in Morristown.</p>
+            </a>
+
+            <a class="seo-home-card" href="/seo/cocktails">
+                <h3>Cocktails</h3>
+                <p>Cocktail bar and drink menu routing.</p>
+            </a>
+
+            <a class="seo-home-card" href="/seo/group-dining">
+                <h3>Group Dining</h3>
+                <p>Group dining and event inquiry routing.</p>
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <section class="homepage-section trust-section" aria-labelledby="trust-title">
+
+        <div class="section-heading">
+            <p class="section-eyebrow">Guest Trust</p>
+            <h2 id="trust-title">Privacy-safe hospitality guidance</h2>
+        </div>
+
+        <div class="trust-grid">
+
+            <div class="trust-card">
+                <h3>No reservations taken here</h3>
+                <p>
+                    ParksideAI routes reservation requests to Parkside Tavern’s official
+                    OpenTable page.
+                </p>
+            </div>
+
+            <div class="trust-card">
+                <h3>No guest data collection</h3>
+                <p>
+                    ParksideAI does not ask for names, phone numbers, emails, payment
+                    details, or private booking information.
+                </p>
+            </div>
+
+            <div class="trust-card">
+                <h3>Official links first</h3>
+                <p>
+                    Guests are routed to parksidenj.com, OpenTable, or Tripleseat depending
+                    on what they need.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
 
 </main>
 
@@ -105,6 +305,32 @@
     </div>
 
 </section>
+
+
+<footer class="site-footer">
+
+    <div>
+        <strong>ParksideAI</strong>
+        <p>
+            AI hospitality routing and local SEO assistant for Parkside Tavern.
+        </p>
+    </div>
+
+    <div class="footer-links">
+        <a href="https://parksidenj.com/" target="_blank" rel="noopener noreferrer">
+            Official Website
+        </a>
+
+        <a href="https://www.opentable.com/r/parkside-tavern-morristown" target="_blank" rel="noopener noreferrer">
+            OpenTable
+        </a>
+
+        <a href="https://parksidetavern.tripleseat.com/party_request/45075" target="_blank" rel="noopener noreferrer">
+            Private Events
+        </a>
+    </div>
+
+</footer>
 
 
 <noscript>
