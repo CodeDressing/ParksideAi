@@ -1,0 +1,248 @@
+{
+  "version": "phase_4_expanded",
+  "platform": "ParksideAI",
+  "restaurant": "Parkside Tavern",
+  "privacy_mode": "official_link_routing_only",
+  "rules": [
+    "Do not take reservations directly.",
+    "Do not collect guest personal information.",
+    "Do not store guest personal information.",
+    "Route reservations to OpenTable.",
+    "Route private events to Tripleseat.",
+    "Use official Parkside Tavern information."
+  ],
+
+  "official_links": {
+    "main_website": "https://parksidenj.com/",
+    "reservations": "https://www.opentable.com/r/parkside-tavern-morristown",
+    "private_events": "https://parksidetavern.tripleseat.com/party_request/45075",
+    "food_menu": "https://parksidenj.com/morristown-morristown-parkside-tavern-food-menu",
+    "drink_menu": "https://parksidenj.com/morristown-morristown-parkside-tavern-drink-menu"
+  },
+
+  "seo_pages": [
+
+    {
+      "slug": "private-events",
+      "title": "Private Events",
+      "headline": "Private Events at Parkside Tavern in Morristown NJ",
+      "primary_keyword": "private events in Morristown",
+      "secondary_keywords": [
+        "private event venue Morristown",
+        "Morristown event venue",
+        "group events Morristown",
+        "party venue Morristown"
+      ],
+      "intent": "private_event",
+      "official_link": "https://parksidetavern.tripleseat.com/party_request/45075",
+      "cta_label": "Submit Event Inquiry",
+      "description": "Explore private events, group gatherings, celebrations, and corporate event opportunities at Parkside Tavern in Morristown NJ.",
+      "content_focus": [
+        "group gatherings",
+        "celebrations",
+        "corporate events",
+        "holiday events",
+        "Morristown hospitality"
+      ]
+    },
+
+    {
+      "slug": "birthday-parties",
+      "title": "Birthday Parties",
+      "headline": "Birthday Parties at Parkside Tavern",
+      "primary_keyword": "birthday party restaurant Morristown",
+      "secondary_keywords": [
+        "birthday dinner Morristown",
+        "birthday venue Morristown",
+        "group birthday restaurant"
+      ],
+      "intent": "private_event",
+      "official_link": "https://parksidetavern.tripleseat.com/party_request/45075",
+      "cta_label": "Plan a Birthday Event",
+      "description": "Explore birthday party and celebration options at Parkside Tavern in Morristown NJ.",
+      "content_focus": [
+        "birthday dinners",
+        "group celebrations",
+        "cocktails",
+        "social dining"
+      ]
+    },
+
+    {
+      "slug": "corporate-events",
+      "title": "Corporate Events",
+      "headline": "Corporate Events in Morristown NJ",
+      "primary_keyword": "corporate event venue Morristown",
+      "secondary_keywords": [
+        "business dinner Morristown",
+        "corporate gathering venue",
+        "networking event Morristown"
+      ],
+      "intent": "private_event",
+      "official_link": "https://parksidetavern.tripleseat.com/party_request/45075",
+      "cta_label": "Corporate Event Inquiry",
+      "description": "Explore corporate events and business gatherings at Parkside Tavern in Morristown NJ.",
+      "content_focus": [
+        "networking",
+        "business gatherings",
+        "team dinners",
+        "hospitality venue"
+      ]
+    },
+
+    {
+      "slug": "holiday-parties",
+      "title": "Holiday Parties",
+      "headline": "Holiday Parties at Parkside Tavern",
+      "primary_keyword": "holiday party venue Morristown",
+      "secondary_keywords": [
+        "corporate holiday party",
+        "holiday gathering Morristown",
+        "winter event venue"
+      ],
+      "intent": "private_event",
+      "official_link": "https://parksidetavern.tripleseat.com/party_request/45075",
+      "cta_label": "Holiday Event Inquiry",
+      "description": "Discover holiday party opportunities at Parkside Tavern in Morristown NJ.",
+      "content_focus": [
+        "holiday celebrations",
+        "winter gatherings",
+        "group dining",
+        "cocktail events"
+      ]
+    },
+
+    {
+      "slug": "brunch",
+      "title": "Brunch",
+      "headline": "Brunch in Morristown NJ",
+      "primary_keyword": "brunch in Morristown",
+      "secondary_keywords": [
+        "weekend brunch Morristown",
+        "Morristown brunch restaurant",
+        "cocktail brunch"
+      ],
+      "intent": "restaurant_info",
+      "official_link": "https://parksidenj.com/",
+      "cta_label": "Visit Official Website",
+      "description": "Explore brunch and weekend dining at Parkside Tavern in Morristown NJ.",
+      "content_focus": [
+        "weekend brunch",
+        "cocktails",
+        "social dining",
+        "local hospitality"
+      ]
+    },
+
+    {
+      "slug": "happy-hour",
+      "title": "Happy Hour",
+      "headline": "Happy Hour at Parkside Tavern",
+      "primary_keyword": "happy hour in Morristown",
+      "secondary_keywords": [
+        "cocktails Morristown",
+        "after work drinks",
+        "Morristown tavern"
+      ],
+      "intent": "restaurant_info",
+      "official_link": "https://parksidenj.com/",
+      "cta_label": "View Official Website",
+      "description": "Discover happy hour, cocktails, drinks, and tavern hospitality in Morristown NJ.",
+      "content_focus": [
+        "cocktails",
+        "beer",
+        "wine",
+        "after work dining"
+      ]
+    },
+
+    {
+      "slug": "cocktails",
+      "title": "Cocktails",
+      "headline": "Cocktail Bar in Morristown NJ",
+      "primary_keyword": "cocktail bar in Morristown NJ",
+      "secondary_keywords": [
+        "Morristown drinks",
+        "cocktails near Headquarters Plaza",
+        "craft cocktails Morristown"
+      ],
+      "intent": "restaurant_info",
+      "official_link": "https://parksidenj.com/morristown-morristown-parkside-tavern-drink-menu",
+      "cta_label": "View Drink Menu",
+      "description": "Explore cocktails, spirits, wine, and bar offerings at Parkside Tavern.",
+      "content_focus": [
+        "cocktails",
+        "spirits",
+        "bar scene",
+        "nightlife"
+      ]
+    },
+
+    {
+      "slug": "dinner",
+      "title": "Dinner",
+      "headline": "Dinner at Parkside Tavern",
+      "primary_keyword": "dinner in Morristown",
+      "secondary_keywords": [
+        "restaurant in Morristown",
+        "dinner near Headquarters Plaza",
+        "local dining"
+      ],
+      "intent": "restaurant_info",
+      "official_link": "https://parksidenj.com/morristown-morristown-parkside-tavern-food-menu",
+      "cta_label": "View Food Menu",
+      "description": "Explore dining and food offerings at Parkside Tavern in Morristown NJ.",
+      "content_focus": [
+        "American tavern dining",
+        "social dining",
+        "cocktails",
+        "group dinners"
+      ]
+    },
+
+    {
+      "slug": "sports-viewing",
+      "title": "Sports Viewing",
+      "headline": "Sports Viewing at Parkside Tavern",
+      "primary_keyword": "sports bar Morristown",
+      "secondary_keywords": [
+        "watch sports Morristown",
+        "sports restaurant NJ",
+        "game day dining"
+      ],
+      "intent": "restaurant_info",
+      "official_link": "https://parksidenj.com/",
+      "cta_label": "Visit Official Website",
+      "description": "Explore sports viewing, food, drinks, and social dining at Parkside Tavern.",
+      "content_focus": [
+        "sports",
+        "cocktails",
+        "group dining",
+        "watch parties"
+      ]
+    },
+
+    {
+      "slug": "group-dining",
+      "title": "Group Dining",
+      "headline": "Group Dining in Morristown NJ",
+      "primary_keyword": "group dining Morristown",
+      "secondary_keywords": [
+        "large group restaurant",
+        "group dinners",
+        "party dining Morristown"
+      ],
+      "intent": "private_event",
+      "official_link": "https://parksidetavern.tripleseat.com/party_request/45075",
+      "cta_label": "Group Dining Inquiry",
+      "description": "Explore large group dining and gathering opportunities at Parkside Tavern.",
+      "content_focus": [
+        "group dinners",
+        "celebrations",
+        "corporate groups",
+        "private hospitality"
+      ]
+    }
+
+  ]
+}
