@@ -101,7 +101,7 @@ def seo_home():
 
     return render_template(
 
-        "seo_index.html",
+        "seo_page.html",
 
         seo_groups=
             SEO_DISCOVERY_GROUPS,
