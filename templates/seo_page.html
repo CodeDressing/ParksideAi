@@ -1,16 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.meta.title }}</title>
-    <meta name="description" content="{{ page.meta.description }}">
-    <meta name="robots" content="{{ page.meta.robots }}">
-    <link rel="canonical" href="{{ page.meta.canonical }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <title>
+        {{ page.meta.title if page.meta and page.meta.title else page.title }}
+    </title>
+
+    <meta
+        name="description"
+        content="{{ page.meta.description if page.meta and page.meta.description else page.subheadline }}"
+    >
+
+    <meta
+        name="robots"
+        content="{{ page.meta.robots if page.meta and page.meta.robots else 'index, follow' }}"
+    >
+
+    {% if page.meta and page.meta.canonical %}
+        <link rel="canonical" href="{{ page.meta.canonical }}">
+    {% endif %}
+
+    <meta
+        property="og:title"
+        content="{{ page.meta.title if page.meta and page.meta.title else page.title }}"
+    >
+
+    <meta
+        property="og:description"
+        content="{{ page.meta.description if page.meta and page.meta.description else page.subheadline }}"
+    >
+
+    <meta property="og:type" content="website">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
 
     <script type="application/ld+json">
         {{ schema_json|safe }}
+    </script>
+</head>
     </script>
 </head>
 
