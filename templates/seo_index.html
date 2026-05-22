@@ -2,20 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ restaurant }} SEO Pages</title>
-</head>
-<body>
-    <h1>{{ restaurant }} SEO Pages</h1>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ restaurant }} SEO Pages | {{ city }}, {{ state }}</title>
+    <meta name="description" content="Explore Parkside Tavern SEO landing pages for events, dining, cocktails, brunch, private parties, and Morristown hospitality.">
 
-    {% for group in seo_groups %}
-        <h2>{{ group.category }}</h2>
-        <ul>
-            {% for slug in group.pages %}
-                <li>
-                    <a href="/seo/{{ slug }}">{{ slug.replace("-", " ").title() }}</a>
-                </li>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="seo-index-body">
+
+    <main class="seo-index-wrapper">
+
+        <section class="seo-hero">
+            <p class="seo-eyebrow">ParksideAI SEO Engine</p>
+
+            <h1>{{ restaurant }} SEO Pages</h1>
+
+            <p class="seo-subtitle">
+                A local discovery hub for {{ restaurant }} in {{ city }}, {{ state }}.
+                Explore dining, events, private parties, cocktails, brunch, and hospitality pages.
+            </p>
+
+            <div class="seo-hero-actions">
+                <a href="/" class="seo-button secondary">Back to Assistant</a>
+                <a href="/seo/sitemap-preview" class="seo-button primary">View Sitemap Preview</a>
+            </div>
+        </section>
+
+        <section class="seo-groups">
+
+            {% for group in seo_groups %}
+            <article class="seo-group-card">
+
+                <div class="seo-group-header">
+                    <h2>{{ group.category }}</h2>
+                    <p>
+                        {{ group.pages|length }} discovery page{% if group.pages|length != 1 %}s{% endif %}
+                    </p>
+                </div>
+
+                <div class="seo-page-grid">
+                    {% for slug in group.pages %}
+                    <a class="seo-page-card" href="/seo/{{ slug }}">
+                        <span>{{ slug.replace("-", " ").title() }}</span>
+                        <small>/seo/{{ slug }}</small>
+                    </a>
+                    {% endfor %}
+                </div>
+
+            </article>
             {% endfor %}
-        </ul>
-    {% endfor %}
+
+        </section>
+
+        <section class="seo-footer-note">
+            <p>
+                ParksideAI supports discovery only. Reservations, menus, and private event inquiries
+                should always route guests to official Parkside Tavern links.
+            </p>
+        </section>
+
+    </main>
+
 </body>
 </html>
