@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ restaurant }} SEO Pages</title>
+</head>
+<body>
+    <h1>{{ restaurant }} SEO Pages</h1>
+
+    {% for group in seo_groups %}
+        <h2>{{ group.category }}</h2>
+        <ul>
+            {% for slug in group.pages %}
+                <li>
+                    <a href="/seo/{{ slug }}">{{ slug.replace("-", " ").title() }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</body>
+</html>
