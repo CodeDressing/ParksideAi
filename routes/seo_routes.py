@@ -197,13 +197,71 @@ def seo_landing_page(slug):
 
         ), 404
 
+    schema_payload = {
+
+        "@context":
+            "https://schema.org",
+
+        "@graph": [
+
+            seo_service.build_structured_data(),
+
+            page_data.get(
+                "schema",
+                {}
+            ),
+
+            {
+                "@type":
+                    "WebPage",
+
+                "name":
+                    page_data.get(
+                        "headline",
+                        page_data.get(
+                            "title",
+                            "Parkside Tavern"
+                        )
+                    ),
+
+                "description":
+                    page_data.get(
+                        "subheadline",
+                        ""
+                    ),
+
+                "url":
+                    (
+                        f"https://parksideai.onrender.com"
+                        f"/seo/{slug}"
+                    ),
+
+                "isPartOf": {
+
+                    "@type":
+                        "WebSite",
+
+                    "name":
+                        "ParksideAI",
+
+                    "url":
+                        "https://parksideai.onrender.com"
+                },
+
+                "about": {
+
+                    "@type":
+                        "Restaurant",
+
+                    "name":
+                        settings.RESTAURANT_NAME
+                }
+            }
+        ]
+    }
+
     schema_json = json.dumps(
-
-        page_data.get(
-            "schema",
-            {}
-        ),
-
+        schema_payload,
         indent=2
     )
 
@@ -302,6 +360,7 @@ def sitemap_preview():
 
 
 # ============================================================
+# ============================================================
 # SECTION 10 — RESERVATION LANDING PAGE
 # ============================================================
 
@@ -394,7 +453,23 @@ def seo_reservations():
             ),
 
         "schema":
-            seo_service.build_structured_data(),
+            {
+
+                "@type":
+                    "WebPage",
+
+                "name":
+                    "Parkside Tavern Reservations",
+
+                "description":
+                    (
+                        "Official reservation routing "
+                        "for Parkside Tavern in Morristown NJ."
+                    ),
+
+                "url":
+                    "https://parksideai.onrender.com/seo/reservations"
+            },
 
         "seo_rules":
             settings.SEO_PAGE_RULES
@@ -424,8 +499,6 @@ def seo_reservations():
         official_links=
             seo_service.get_official_links()
     )
-
-
 # ============================================================
 # SECTION 11 — MENU LANDING PAGE
 # ============================================================
