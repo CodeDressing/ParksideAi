@@ -39,43 +39,34 @@ search_engine_bp = Blueprint(
 
 
 # ============================================================
-# SECTION 3 — CORE DOMAIN CONFIGURATION
+# SECTION 3 — ROUTE IMPORTS
 # ============================================================
 
-BASE_URL = (
-    "https://parksideai.onrender.com"
+from routes.main_routes import main_bp
+from routes.chat_routes import chat_bp
+from routes.seo_routes import seo_bp
+from routes.search_engine_routes import search_engine_bp
+
+
+# ============================================================
+# SECTION 4 — BLUEPRINT REGISTRATION
+# ============================================================
+
+app.register_blueprint(
+    main_bp
 )
 
-
-# ============================================================
-# SECTION 4 — ROBOTS.TXT
-# ============================================================
-
-@search_engine_bp.route(
-    "/robots.txt",
-    methods=["GET"]
+app.register_blueprint(
+    chat_bp
 )
-def robots_txt():
-    """
-    Public crawler instructions.
-    """
 
-    sitemap_url = (
-        f"{BASE_URL}/sitemap.xml"
-    )
+app.register_blueprint(
+    seo_bp
+)
 
-    content = f"""User-agent: *
-Allow: /
-
-Sitemap: {sitemap_url}
-"""
-
-    return Response(
-        content,
-        mimetype="text/plain"
-    )
-
-
+app.register_blueprint(
+    search_engine_bp
+)
 # ============================================================
 # SECTION 5 — XML SITEMAP
 # ============================================================

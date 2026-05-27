@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5020dba6-25cf-49db-a604-6f9fb6dc94ed" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/routes/search_engine_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/search_engine_routes.py" afterDir="false" />
-    </list>
+    <list default="true" id="5020dba6-25cf-49db-a604-6f9fb6dc94ed" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
