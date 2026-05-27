@@ -1,34 +1,26 @@
 # ============================================================
 # ParksideAI
-# Application Entry Point
-# Phase 5 Part 2.6
+# Production Entry Point
+# Phase 6 Part 3.2
 # ============================================================
 
 from app import create_app
 
-from routes.search_engine_routes import search_engine_bp
-
 
 # ============================================================
-# SECTION 1 — APP FACTORY
+# SECTION 1 — APPLICATION INSTANCE
 # ============================================================
 
 app = create_app()
 
 
 # ============================================================
-# SECTION 2 — SEARCH ENGINE BLUEPRINT REGISTRATION
-# ============================================================
-
-app.register_blueprint(
-    search_engine_bp
-)
-
-
-# ============================================================
-# SECTION 3 — LOCAL DEVELOPMENT SERVER
+# SECTION 2 — LOCAL DEVELOPMENT SERVER
 # ============================================================
 
 if __name__ == "__main__":
 
-    app.run()
+    app.run(
+        host="0.0.0.0",
+        port=10000
+    )

@@ -1,13 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<!-- =========================================================
+     ParksideAI SEO Landing Page Template
+     Phase 6 Part 3.3
+     ========================================================= -->
+
 <head>
-<head>
+    <!-- =====================================================
+         SECTION 1 — CORE META
+         ===================================================== -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>
-        {{ page.meta.title if page.meta and page.meta.title else page.title }}
-    </title>
+
+    <!-- =====================================================
+         SECTION 2 — DYNAMIC SEO META
+         ===================================================== -->
+
+    <title>{{ page.meta.title if page.meta and page.meta.title else page.title }}</title>
 
     <meta
         name="description"
@@ -23,6 +35,11 @@
         <link rel="canonical" href="{{ page.meta.canonical }}">
     {% endif %}
 
+
+    <!-- =====================================================
+         SECTION 3 — OPEN GRAPH META
+         ===================================================== -->
+
     <meta
         property="og:title"
         content="{{ page.meta.title if page.meta and page.meta.title else page.title }}"
@@ -35,74 +52,152 @@
 
     <meta property="og:type" content="website">
 
+
+    <!-- =====================================================
+         SECTION 4 — STYLES
+         ===================================================== -->
+
     <link
         rel="stylesheet"
         href="{{ url_for('static', filename='css/style.css') }}"
     >
 
+
+    <!-- =====================================================
+         SECTION 5 — STRUCTURED DATA
+         ===================================================== -->
+
     <script type="application/ld+json">
         {{ schema_json|safe }}
     </script>
 </head>
-    </script>
-</head>
+
 
 <body>
 
-<main class="seo-page">
+    <!-- =====================================================
+         SECTION 6 — SEO PAGE WRAPPER
+         ===================================================== -->
 
-    <section class="seo-hero">
-        <p class="seo-eyebrow">Parkside Tavern • Morristown NJ</p>
+    <main class="seo-page">
 
-        <h1>{{ page.headline }}</h1>
 
-        <p>{{ page.subheadline }}</p>
+        <!-- =================================================
+             SECTION 7 — HERO
+             ================================================= -->
 
-        <a class="button-like" href="{{ page.cta.url }}" target="_blank" rel="noopener noreferrer">
-            {{ page.cta.label }}
-        </a>
-    </section>
+        <section class="seo-hero">
 
-    <section class="seo-content">
-        {% for section in page.content_sections %}
-            <article class="seo-card">
-                <h2>{{ section.heading }}</h2>
-                <p>{{ section.body }}</p>
-            </article>
-        {% endfor %}
-    </section>
+            <p class="seo-eyebrow">
+                Parkside Tavern • Morristown NJ
+            </p>
 
-    <section class="seo-routing">
-        <h2>Official Parkside Tavern Links</h2>
+            <h1>
+                {{ page.headline }}
+            </h1>
 
-        <div class="seo-link-grid">
-            <a href="{{ page.official_links.main_website }}" target="_blank" rel="noopener noreferrer">
-                Official Website
+            <p>
+                {{ page.subheadline }}
+            </p>
+
+            <a
+                class="button-like"
+                href="{{ page.cta.url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                {{ page.cta.label }}
             </a>
 
-            <a href="{{ page.official_links.reservations }}" target="_blank" rel="noopener noreferrer">
-                Reservations
-            </a>
+        </section>
 
-            <a href="{{ page.official_links.private_events }}" target="_blank" rel="noopener noreferrer">
-                Private Events
-            </a>
 
-            <a href="{{ page.official_links.food_menu }}" target="_blank" rel="noopener noreferrer">
-                Food Menu
-            </a>
+        <!-- =================================================
+             SECTION 8 — CONTENT SECTIONS
+             ================================================= -->
 
-            <a href="{{ page.official_links.drink_menu }}" target="_blank" rel="noopener noreferrer">
-                Drink Menu
-            </a>
-        </div>
+        <section class="seo-content">
 
-        <p class="seo-note">
-            {{ page.privacy_note }}
-        </p>
-    </section>
+            {% for section in page.content_sections %}
 
-</main>
+                <article class="seo-card">
+
+                    <h2>
+                        {{ section.heading }}
+                    </h2>
+
+                    <p>
+                        {{ section.body }}
+                    </p>
+
+                </article>
+
+            {% endfor %}
+
+        </section>
+
+
+        <!-- =================================================
+             SECTION 9 — OFFICIAL ROUTING LINKS
+             ================================================= -->
+
+        <section class="seo-routing">
+
+            <h2>
+                Official Parkside Tavern Links
+            </h2>
+
+            <div class="seo-link-grid">
+
+                <a
+                    href="{{ page.official_links.main_website }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Official Website
+                </a>
+
+                <a
+                    href="{{ page.official_links.reservations }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Reservations
+                </a>
+
+                <a
+                    href="{{ page.official_links.private_events }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Private Events
+                </a>
+
+                <a
+                    href="{{ page.official_links.food_menu }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Food Menu
+                </a>
+
+                <a
+                    href="{{ page.official_links.drink_menu }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Drink Menu
+                </a>
+
+            </div>
+
+            <p class="seo-note">
+                {{ page.privacy_note }}
+            </p>
+
+        </section>
+
+    </main>
 
 </body>
 </html>
