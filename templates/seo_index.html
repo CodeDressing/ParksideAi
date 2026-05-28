@@ -63,6 +63,93 @@
         </section>
 
     </main>
+<!-- =====================================================
+     PARKSIDEAI FLOATING CHAT WIDGET
+     Phase 6 Part 4.1 — Global SEO Page Chat
+===================================================== -->
 
+<section
+    class="parkside-chat-widget"
+    id="parkside-chat-widget"
+    aria-label="ParksideAI chat assistant"
+>
+
+    <div class="parkside-chat-header">
+
+        <div class="parkside-chat-title">
+            ParksideAI Assistant
+        </div>
+
+        <button
+            id="parkside-chat-toggle"
+            class="parkside-chat-toggle"
+            type="button"
+            aria-label="Minimize Chat"
+        >
+            —
+        </button>
+
+    </div>
+
+    <div
+        class="parkside-chat-body"
+        id="parkside-chat-body"
+    >
+
+        <div
+            class="chat-messages"
+            id="chat-messages"
+            aria-live="polite"
+            aria-atomic="false"
+        >
+
+            <div class="bot-message">
+                Welcome to ParksideAI. I can help you find official
+                Parkside Tavern information and route you to reservations,
+                private events, menus, drinks, brunch, happy hour, and more.
+            </div>
+
+        </div>
+
+        <div class="chat-input-area">
+
+            <label
+                for="user-input"
+                class="screen-reader-only"
+            >
+                Ask ParksideAI a question
+            </label>
+
+            <input
+                type="text"
+                id="user-input"
+                placeholder="Ask about reservations, menus, private events..."
+                autocomplete="off"
+                maxlength="1200"
+            >
+
+            <button
+                id="send-button"
+                type="button"
+            >
+                Send
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<button
+    id="parkside-chat-launcher"
+    class="parkside-chat-launcher"
+    type="button"
+>
+    Chat
+</button>
+
+
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
 </body>
 </html>
