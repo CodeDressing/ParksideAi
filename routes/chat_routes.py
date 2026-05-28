@@ -20,6 +20,7 @@ from datetime import datetime
 from typing import Any, Dict, List
 
 from flask import Blueprint, request, jsonify
+from app import limiter
 
 from services.lead_service import (
     OFFICIAL_LINKS,
@@ -190,6 +191,7 @@ def build_response_metadata(
 # ============================================================
 
 @chat_bp.route("/", methods=["POST"])
+@limiter.limit("30 per minute")
 def chat():
     """
     Main guest-facing chat endpoint.

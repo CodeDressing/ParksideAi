@@ -379,7 +379,7 @@ async function sendMessageToBackend(message) {
                 page_url:
                     window.location.href,
 
-                history:
+                conversation_history:
                     CHAT_STATE.conversationHistory
             })
         }
