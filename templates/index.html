@@ -261,51 +261,101 @@
 </main>
 
 
+<!-- =====================================================
+     PARKSIDEAI FLOATING CHAT WIDGET
+     Phase 6 Part 4.0
+===================================================== -->
+
 <section
-    class="chat-container"
-    id="chat-container"
+    class="parkside-chat-widget"
+    id="parkside-chat-widget"
     aria-label="ParksideAI chat assistant"
 >
 
-    <div class="chat-header">
-        ParksideAI Assistant
-    </div>
+    <!-- HEADER -->
+    <div class="parkside-chat-header">
 
-    <div
-        class="chat-messages"
-        id="chat-messages"
-        aria-live="polite"
-        aria-atomic="false"
-    >
-        <div class="bot-message">
-            Welcome to ParksideAI. I can help you find official Parkside Tavern
-            information and route you to reservations, private events, menus,
-            hours, drinks, brunch, and more.
+        <div class="parkside-chat-title">
+            ParksideAI Assistant
         </div>
+
+        <!-- MINIMIZE BUTTON -->
+        <button
+            id="parkside-chat-toggle"
+            class="parkside-chat-toggle"
+            type="button"
+            aria-label="Minimize Chat"
+        >
+            —
+        </button>
+
     </div>
 
-    <div class="chat-input-area">
 
-        <label for="user-input" class="screen-reader-only">
-            Ask ParksideAI a question
-        </label>
+    <!-- CHAT BODY -->
+    <div
+        class="parkside-chat-body"
+        id="parkside-chat-body"
+    >
 
-        <input
-            type="text"
-            id="user-input"
-            placeholder="Ask about reservations, menus, private events..."
-            autocomplete="off"
-            maxlength="1200"
+        <!-- MESSAGES -->
+        <div
+            class="chat-messages"
+            id="chat-messages"
+            aria-live="polite"
+            aria-atomic="false"
         >
 
-        <button id="send-button" type="button">
-            Send
-        </button>
+            <div class="bot-message">
+                Welcome to ParksideAI. I can help you find official
+                Parkside Tavern information and route you to
+                reservations, private events, menus, drinks,
+                brunch, happy hour, and more.
+            </div>
+
+        </div>
+
+
+        <!-- INPUT AREA -->
+        <div class="chat-input-area">
+
+            <label
+                for="user-input"
+                class="screen-reader-only"
+            >
+                Ask ParksideAI a question
+            </label>
+
+            <input
+                type="text"
+                id="user-input"
+                placeholder="Ask about reservations, menus, private events..."
+                autocomplete="off"
+                maxlength="1200"
+            >
+
+            <button
+                id="send-button"
+                type="button"
+            >
+                Send
+            </button>
+
+        </div>
 
     </div>
 
 </section>
 
+
+<!-- FLOATING REOPEN BUTTON -->
+<button
+    id="parkside-chat-launcher"
+    class="parkside-chat-launcher"
+    type="button"
+>
+    Chat
+</button>
 
 <footer class="site-footer">
 

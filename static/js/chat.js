@@ -24,33 +24,67 @@ const OFFICIAL_LINKS = {
    SECTION 2 — DOM ELEMENTS
 ======================================================== */
 
-const chatContainer =
-    document.getElementById("chat-container");
+const chatWidget =
+    document.getElementById(
+        "parkside-chat-widget"
+    );
+
+const chatBody =
+    document.getElementById(
+        "parkside-chat-body"
+    );
 
 const chatMessages =
-    document.getElementById("chat-messages");
+    document.getElementById(
+        "chat-messages"
+    );
 
 const userInput =
-    document.getElementById("user-input");
+    document.getElementById(
+        "user-input"
+    );
 
 const sendButton =
-    document.getElementById("send-button");
+    document.getElementById(
+        "send-button"
+    );
 
 const openChatButton =
-    document.getElementById("open-chat");
+    document.getElementById(
+        "open-chat"
+    );
 
+const minimizeButton =
+    document.getElementById(
+        "parkside-chat-toggle"
+    );
 
+const launcherButton =
+    document.getElementById(
+        "parkside-chat-launcher"
+    );
 /* ========================================================
    SECTION 3 — CHAT STATE
 ======================================================== */
 
+const CHAT_STORAGE_KEYS = {
+
+    minimized:
+        "parkside_chat_minimized",
+
+    session:
+        "parkside_chat_session"
+};
+
+
 const CHAT_STATE = {
 
-    isOpen: false,
+    isOpen: true,
 
     isSending: false,
 
-    sessionId: generateSessionId(),
+    sessionId:
+        getOrCreateSessionId(),
 
     conversationHistory: [],
 
@@ -58,7 +92,6 @@ const CHAT_STATE = {
 
     initialized: false
 };
-
 
 /* ========================================================
    SECTION 4 — INITIALIZATION
@@ -75,9 +108,11 @@ function initializeChatSystem() {
         return;
     }
 
-    bindCoreEvents();
+  bindCoreEvents();
 
-    initializeWelcomeState();
+restorePersistedChatState();
+
+initializeWelcomeState();
 
     CHAT_STATE.initialized = true;
 }
@@ -93,7 +128,23 @@ function bindCoreEvents() {
 
         openChatButton.addEventListener(
             "click",
-            toggleChat
+            openChat
+        );
+    }
+
+    if (minimizeButton) {
+
+        minimizeButton.addEventListener(
+            "click",
+            minimizeChat
+        );
+    }
+
+    if (launcherButton) {
+
+        launcherButton.addEventListener(
+            "click",
+            maximizeChat
         );
     }
 
@@ -122,7 +173,6 @@ function bindCoreEvents() {
     }
 }
 
-
 /* ========================================================
    SECTION 6 — CHAT OPEN/CLOSE
 ======================================================== */
@@ -130,49 +180,82 @@ function bindCoreEvents() {
    SECTION 6 — CHAT OPEN/CLOSE
 ======================================================== */
 
-function toggleChat() {
-
-    if (!chatContainer) {
-        return;
-    }
-
-    if (CHAT_STATE.isOpen) {
-        closeChat();
-    } else {
-        openChat();
-    }
-}
-
+/* ========================================================
+   SECTION 6 — FLOATING CHAT CONTROL
+======================================================== */
 
 function openChat() {
 
-    CHAT_STATE.isOpen = true;
+    maximizeChat();
+}
 
-    chatContainer.style.display = "flex";
 
-    chatContainer.classList.add("chat-open");
-    chatContainer.classList.remove("chat-closed");
+function minimizeChat() {
 
-    if (openChatButton) {
-        openChatButton.innerText = "Close AI Assistant";
+    if (!chatWidget) {
+        return;
     }
 
+    chatWidget.classList.add(
+        "minimized"
+    );
+
+    if (launcherButton) {
+
+        launcherButton.classList.add(
+            "visible"
+        );
+    }
+
+    localStorage.setItem(
+        CHAT_STORAGE_KEYS.minimized,
+        "true"
+    );
+}
+
+
+function maximizeChat() {
+
+    if (!chatWidget) {
+        return;
+    }
+
+    chatWidget.classList.remove(
+        "minimized"
+    );
+
+    if (launcherButton) {
+
+        launcherButton.classList.remove(
+            "visible"
+        );
+    }
+
+    localStorage.setItem(
+        CHAT_STORAGE_KEYS.minimized,
+        "false"
+    );
+
     focusInput();
+
     scrollToBottom();
 }
 
 
-function closeChat() {
+function restorePersistedChatState() {
 
-    CHAT_STATE.isOpen = false;
+    const minimized =
+        localStorage.getItem(
+            CHAT_STORAGE_KEYS.minimized
+        );
 
-    chatContainer.style.display = "none";
+    if (minimized === "true") {
 
-    chatContainer.classList.remove("chat-open");
-    chatContainer.classList.add("chat-closed");
+        minimizeChat();
 
-    if (openChatButton) {
-        openChatButton.innerText = "Open AI Assistant";
+    } else {
+
+        maximizeChat();
     }
 }
 
@@ -184,9 +267,12 @@ function focusInput() {
     }
 
     setTimeout(() => {
+
         userInput.focus();
+
     }, 100);
 }
+
 
 /* ========================================================
    SECTION 7 — WELCOME STATE
@@ -664,14 +750,33 @@ function removeElement(element) {
     }
 }
 
-function generateSessionId() {
+/* ========================================================
+   SECTION 18 — SESSION STORAGE
+======================================================== */
 
-    return (
+function getOrCreateSessionId() {
+
+    const existingSession =
+        localStorage.getItem(
+            CHAT_STORAGE_KEYS.session
+        );
+
+    if (existingSession) {
+        return existingSession;
+    }
+
+    const newSessionId =
         "parkside_" +
         Date.now() +
         "_" +
         Math.random()
             .toString(36)
-            .substring(2, 10)
+            .substring(2, 10);
+
+    localStorage.setItem(
+        CHAT_STORAGE_KEYS.session,
+        newSessionId
     );
+
+    return newSessionId;
 }
