@@ -738,6 +738,13 @@ class SEOService:
                     f"weekend dining experiences at "
                     f"{self.restaurant_name}."
                 ),
+            "lunch":
+                (
+                    f"{self.restaurant_name} offers lunch in "
+                    f"{self.city} for professionals, visitors, "
+                    f"and guests looking for food, cocktails, "
+                    f"and hospitality near Headquarters Plaza."
+                ),
 
             "happy-hour":
                 (

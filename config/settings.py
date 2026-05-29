@@ -183,6 +183,13 @@ class Settings:
             "official_link": OFFICIAL_PRIVATE_EVENTS_LINK,
             "routing_action": "send_to_tripleseat"
         },
+        "lunch":
+            (
+                f"{self.restaurant_name} offers lunch in "
+                f"{self.city} for professionals, visitors, "
+                f"and guests looking for food, cocktails, "
+                f"and hospitality near Headquarters Plaza."
+            )
         "brunch": {
             "title": "Brunch",
             "primary_keyword": "brunch in Morristown",
