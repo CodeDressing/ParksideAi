@@ -556,13 +556,18 @@ class SEOService:
                 self.build_meta_tags(slug),
 
             "content_sections":
-                self.build_content_sections(
+                 self.build_content_sections(
                     slug,
-                    config
-                ),
+                     config
+                 ),
+
+            "related_pages":
+                  self.get_related_pages(
+                     slug
+                 ),
 
             "cta":
-                cta,
+                 cta,
 
             "official_links":
                 self.get_official_links(),
@@ -649,15 +654,9 @@ class SEOService:
                     f"{title} in {self.city}",
 
                 "body":
-                    (
-                        f"{self.restaurant_name} "
-                        f"is a Morristown hospitality "
-                        f"destination for "
-                        f"{keyword}. Guests can "
-                        f"explore official Parkside "
-                        f"Tavern information, menus, "
-                        f"cocktails, dining, and "
-                        f"event routing."
+                    self.build_dynamic_page_intro(
+                        slug,
+                        keyword
                     )
             },
 
@@ -709,6 +708,75 @@ class SEOService:
         return sections
 
 
+
+    # ========================================================
+    # SECTION 15.1 — DYNAMIC INTRO ENGINE
+    # ========================================================
+
+    def build_dynamic_page_intro(
+        self,
+        slug: str,
+        keyword: str
+    ) -> str:
+
+        intro_map = {
+
+            "private-events":
+                (
+                    f"{self.restaurant_name} offers "
+                    f"private event experiences in "
+                    f"{self.city} for birthdays, "
+                    f"corporate gatherings, holiday "
+                    f"parties, and group celebrations."
+                ),
+
+            "brunch":
+                (
+                    f"Guests exploring brunch in "
+                    f"{self.city} can discover "
+                    f"cocktails, hospitality, and "
+                    f"weekend dining experiences at "
+                    f"{self.restaurant_name}."
+                ),
+
+            "happy-hour":
+                (
+                    f"{self.restaurant_name} offers "
+                    f"happy hour and cocktail-focused "
+                    f"hospitality experiences in "
+                    f"{self.city}, {self.state}."
+                ),
+
+            "cocktails":
+                (
+                    f"{self.restaurant_name} is a "
+                    f"Morristown cocktail destination "
+                    f"offering drinks, nightlife, "
+                    f"social dining, and hospitality."
+                ),
+
+            "group-dining":
+                (
+                    f"Guests searching for group dining "
+                    f"in {self.city} can explore "
+                    f"food, cocktails, celebrations, "
+                    f"and social hospitality experiences "
+                    f"with {self.restaurant_name}."
+                )
+        }
+
+        return intro_map.get(
+
+            slug,
+
+            (
+                f"{self.restaurant_name} provides "
+                f"{keyword} experiences in "
+                f"{self.city}, {self.state}."
+            )
+        )
+
+
     # ========================================================
     # SECTION 16 — STRUCTURED DATA
     # ========================================================
@@ -722,6 +790,7 @@ class SEOService:
         schema = dict(
             settings.STRUCTURED_DATA_DEFAULTS
         )
+        schema["@type"] = "FAQPage"
 
         schema["description"] = (
             settings.SEO_DEFAULT_DESCRIPTION
@@ -750,6 +819,109 @@ class SEOService:
 
                 *settings.SEO_PRIMARY_KEYWORDS[:8]
             ]
+
+            schema["mainEntity"] = [
+
+                {
+                    "@type": "Question",
+
+                    "name":
+                        "Does Parkside Tavern take reservations?",
+
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+
+                        "text":
+                            (
+                                "Yes. Guests can make official "
+                                "reservations through Parkside "
+                                "Tavern's OpenTable platform."
+                            )
+                    }
+                },
+
+                {
+                    "@type": "Question",
+
+                    "name":
+                        "Does Parkside Tavern host private events?",
+
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+
+                        "text":
+                            (
+                                "Yes. Parkside Tavern offers "
+                                "private event and group dining "
+                                "inquiries through the official "
+                                "Tripleseat platform."
+                            )
+                    }
+                },
+
+                {
+                    "@type": "Question",
+
+                    "name":
+                        "Where is Parkside Tavern located?",
+
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+
+                        "text":
+                            (
+                                "Parkside Tavern is located "
+                                "in Morristown, New Jersey."
+                            )
+                    }
+                },
+
+                {
+                    "@type": "Question",
+
+                    "name":
+                        "Does Parkside Tavern offer brunch and cocktails?",
+
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+
+                        "text":
+                            (
+                                "Yes. Parkside Tavern offers "
+                                "brunch, cocktails, food menus, "
+                                "and hospitality-focused dining "
+                                "experiences."
+                            )
+                    }
+                }
+            ]
+            schema["breadcrumb"] = {
+                "@type": "BreadcrumbList",
+
+                "itemListElement": [
+
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": self.main_website
+                    },
+
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "SEO Pages",
+                        "item": f"{self.main_website}seo/"
+                    },
+
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": config["title"],
+                        "item": f"{self.main_website}seo/{slug}"
+                    }
+                ]
+            }
 
         return schema
 

@@ -136,11 +136,123 @@
 
         </section>
 
+<!-- =================================================
+     SECTION 9 — FAQ SECTION
+================================================= -->
 
+<section class="seo-faq-section">
+
+    <h2>
+        Frequently Asked Questions
+    </h2>
+
+    <div class="seo-faq-list">
+
+
+        <article class="seo-faq-item">
+
+            <h3>
+                Does Parkside Tavern take reservations?
+            </h3>
+
+            <p>
+                Yes. Guests can make official reservations
+                directly through Parkside Tavern’s official
+                OpenTable reservation platform.
+            </p>
+
+        </article>
+
+
+        <article class="seo-faq-item">
+
+            <h3>
+                Does Parkside Tavern host private events?
+            </h3>
+
+            <p>
+                Yes. Parkside Tavern offers private event
+                inquiries for birthdays, celebrations,
+                corporate gatherings, and group dining.
+            </p>
+
+        </article>
+
+
+        <article class="seo-faq-item">
+
+            <h3>
+                Where is Parkside Tavern located?
+            </h3>
+
+            <p>
+                Parkside Tavern is located in Morristown,
+                New Jersey and serves guests from across
+                Morris County and surrounding areas.
+            </p>
+
+        </article>
+
+
+        <article class="seo-faq-item">
+
+            <h3>
+                Does Parkside Tavern offer brunch and cocktails?
+            </h3>
+
+            <p>
+                Yes. Parkside Tavern offers brunch,
+                cocktails, food menus, drinks,
+                and hospitality-focused dining
+                experiences in Morristown NJ.
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
         <!-- =================================================
              SECTION 9 — OFFICIAL ROUTING LINKS
              ================================================= -->
+<!-- =================================================
+     SECTION 10 — RELATED SEO PAGES
+================================================= -->
 
+{% if page.related_pages %}
+
+<section class="seo-related-pages">
+
+    <h2>
+        Related Parkside Tavern Guides
+    </h2>
+
+    <div class="seo-related-grid">
+
+        {% for related in page.related_pages %}
+
+            <a
+                class="seo-related-card"
+                href="{{ related.url_path }}"
+            >
+
+                <span>
+                    {{ related.title }}
+                </span>
+
+                <small>
+                    {{ related.primary_keyword }}
+                </small>
+
+            </a>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endif %}
         <section class="seo-routing">
 
             <h2>
@@ -198,6 +310,8 @@
         </section>
 
     </main>
+
+
 <!-- =====================================================
      PARKSIDEAI FLOATING CHAT WIDGET
      Phase 6 Part 4.1 — Global SEO Page Chat
