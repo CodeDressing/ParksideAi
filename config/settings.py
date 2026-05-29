@@ -225,6 +225,47 @@ class Settings:
             "official_link": OFFICIAL_PRIVATE_EVENTS_LINK,
             "routing_action": "send_to_tripleseat"
         }
+        ,
+
+        "sports-bar-morristown": {
+            "title": "Sports Bar Morristown NJ",
+            "primary_keyword": "sports bar Morristown NJ",
+            "intent": "restaurant_info",
+            "official_link": OFFICIAL_MAIN_WEBSITE,
+            "routing_action": "send_to_official_website"
+        },
+
+        "craft-cocktails-morristown": {
+            "title": "Craft Cocktails Morristown NJ",
+            "primary_keyword": "craft cocktails Morristown NJ",
+            "intent": "restaurant_info",
+            "official_link": OFFICIAL_DRINK_MENU_LINK,
+            "routing_action": "send_to_official_website"
+        },
+
+        "nightlife-morristown": {
+            "title": "Nightlife Morristown NJ",
+            "primary_keyword": "nightlife Morristown NJ",
+            "intent": "restaurant_info",
+            "official_link": OFFICIAL_MAIN_WEBSITE,
+            "routing_action": "send_to_official_website"
+        },
+
+        "weekend-brunch-morristown": {
+            "title": "Weekend Brunch Morristown NJ",
+            "primary_keyword": "weekend brunch Morristown NJ",
+            "intent": "restaurant_info",
+            "official_link": OFFICIAL_FOOD_MENU_LINK,
+            "routing_action": "send_to_official_website"
+        },
+
+        "bars-near-headquarters-plaza": {
+            "title": "Bars Near Headquarters Plaza",
+            "primary_keyword": "bars near Headquarters Plaza Morristown",
+            "intent": "restaurant_info",
+            "official_link": OFFICIAL_MAIN_WEBSITE,
+            "routing_action": "send_to_official_website"
+        }
     }
 
     # ============================================================
