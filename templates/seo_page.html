@@ -137,7 +137,8 @@
         </section>
 
 <!-- =================================================
-     SECTION 9 — FAQ SECTION
+     SECTION 9 — FAQ + INTERNAL LINK AUTHORITY
+     Phase 6 Part 6.0
 ================================================= -->
 
 <section class="seo-faq-section">
@@ -160,33 +161,41 @@
             <h3>Does Parkside Tavern host private events?</h3>
             <p>
                 Yes. Parkside Tavern offers private event inquiries for birthdays,
-                celebrations, corporate gatherings, and group dining.
+                celebrations, corporate gatherings, holiday parties, and group dining.
             </p>
         </article>
 
         <article class="seo-faq-item">
             <h3>Where is Parkside Tavern located?</h3>
             <p>
-                Parkside Tavern is located in Morristown, New Jersey and serves
-                guests from across Morris County and surrounding areas.
+                Parkside Tavern is located in Morristown, New Jersey near
+                Headquarters Plaza and serves guests from across Morris County.
             </p>
         </article>
 
         <article class="seo-faq-item">
-            <h3>Does Parkside Tavern offer brunch and cocktails?</h3>
+            <h3>Does Parkside Tavern offer lunch, brunch, dinner, and cocktails?</h3>
             <p>
-                Yes. Parkside Tavern offers brunch, cocktails, food menus, drinks,
-                and hospitality-focused dining experiences in Morristown NJ.
+                Yes. Parkside Tavern offers food, cocktails, brunch, dinner,
+                lunch discovery, drinks, and hospitality-focused dining experiences
+                in Morristown NJ.
             </p>
         </article>
 
-        {% if page.slug == "lunch" %}
+        {% if page.slug in [
+            "lunch",
+            "business-lunch-morristown",
+            "lunch-near-headquarters-plaza",
+            "weekday-lunch-morristown",
+            "lunch-meeting-restaurant",
+            "lunch-cocktails-morristown"
+        ] %}
         <article class="seo-faq-item">
             <h3>Is Parkside Tavern a good lunch spot in Morristown?</h3>
             <p>
                 Yes. Parkside Tavern is positioned for lunch discovery in Morristown,
                 especially for guests near Headquarters Plaza, local offices,
-                hotels, and downtown Morristown.
+                hotels, downtown Morristown, and business lunch traffic.
             </p>
         </article>
         {% endif %}
@@ -194,9 +203,167 @@
     </div>
 
 </section>
-        <!-- =================================================
-             SECTION 9 — OFFICIAL ROUTING LINKS
-             ================================================= -->
+
+
+<!-- =================================================
+     SECTION 9A — LUNCH CLUSTER AUTHORITY LINKS
+================================================= -->
+
+{% if page.slug in [
+    "lunch",
+    "business-lunch-morristown",
+    "lunch-near-headquarters-plaza",
+    "weekday-lunch-morristown",
+    "lunch-meeting-restaurant",
+    "lunch-cocktails-morristown"
+] %}
+
+<section class="seo-related-pages">
+
+    <h2>
+        Related Lunch Guides
+    </h2>
+
+    <div class="seo-related-grid">
+
+        <a class="seo-related-card" href="/seo/lunch">
+            <span>Lunch</span>
+            <small>lunch in Morristown</small>
+        </a>
+
+        <a class="seo-related-card" href="/seo/business-lunch-morristown">
+            <span>Business Lunch Morristown</span>
+            <small>business lunch morristown</small>
+        </a>
+
+        <a class="seo-related-card" href="/seo/lunch-near-headquarters-plaza">
+            <span>Lunch Near Headquarters Plaza</span>
+            <small>lunch near Headquarters Plaza</small>
+        </a>
+
+        <a class="seo-related-card" href="/seo/weekday-lunch-morristown">
+            <span>Weekday Lunch Morristown</span>
+            <small>weekday lunch morristown</small>
+        </a>
+
+        <a class="seo-related-card" href="/seo/lunch-meeting-restaurant">
+            <span>Lunch Meeting Restaurant</span>
+            <small>lunch meeting restaurant morristown</small>
+        </a>
+
+        <a class="seo-related-card" href="/seo/lunch-cocktails-morristown">
+            <span>Lunch Cocktails Morristown</span>
+            <small>lunch cocktails morristown</small>
+        </a>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+
+<!-- =================================================
+     SECTION 9B — EVENT CLUSTER AUTHORITY LINKS
+================================================= -->
+
+{% if page.slug in [
+    "private-events",
+    "birthday-parties",
+    "corporate-events",
+    "holiday-parties",
+    "group-dining",
+    "rehearsal-dinners",
+    "retirement-parties",
+    "networking-events",
+    "team-dinners",
+    "graduation-parties"
+] %}
+
+<section class="seo-related-pages">
+
+    <h2>
+        Related Event Guides
+    </h2>
+
+    <div class="seo-related-grid">
+
+        <a class="seo-related-card" href="/seo/private-events">
+            <span>Private Events</span>
+            <small>private events in Morristown</small>
+        </a>
+
+        <a class="seo-related-card" href="/seo/birthday-parties">
+            <span>Birthday Parties</span>
+            <small>birthday party restaurant Morristown</small>
+        </a>
+
+        <a class="seo-related-card" href="/seo/corporate-events">
+            <span>Corporate Events</span>
+            <small>corporate event venue Morristown</small>
+        </a>
+
+        <a class="seo-related-card" href="/seo/holiday-parties">
+            <span>Holiday Parties</span>
+            <small>holiday party venue Morristown</small>
+        </a>
+
+        <a class="seo-related-card" href="/seo/group-dining">
+            <span>Group Dining</span>
+            <small>group dining Morristown</small>
+        </a>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+
+<!-- =================================================
+     SECTION 9C — MORRISTOWN DISCOVERY AUTHORITY LINKS
+================================================= -->
+
+{% if page.slug in [
+    "sports-bar-morristown",
+    "bars-near-headquarters-plaza",
+    "nightlife-morristown",
+    "sports-viewing"
+] %}
+
+<section class="seo-related-pages">
+
+    <h2>
+        Related Morristown Guides
+    </h2>
+
+    <div class="seo-related-grid">
+
+        <a class="seo-related-card" href="/seo/sports-bar-morristown">
+            <span>Sports Bar Morristown</span>
+            <small>sports bar Morristown NJ</small>
+        </a>
+
+        <a class="seo-related-card" href="/seo/bars-near-headquarters-plaza">
+            <span>Bars Near Headquarters Plaza</span>
+            <small>bars near Headquarters Plaza Morristown</small>
+        </a>
+
+        <a class="seo-related-card" href="/seo/nightlife-morristown">
+            <span>Nightlife Morristown</span>
+            <small>nightlife Morristown NJ</small>
+        </a>
+
+        <a class="seo-related-card" href="/seo/sports-viewing">
+            <span>Sports Viewing</span>
+            <small>sports bar Morristown</small>
+        </a>
+
+    </div>
+
+</section>
+
+{% endif %}
 <!-- =================================================
      SECTION 10 — RELATED SEO PAGES
 ================================================= -->

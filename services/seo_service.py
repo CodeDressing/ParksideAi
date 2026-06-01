@@ -327,7 +327,46 @@ class SEOService:
 
                 related.append(page)
 
-        return related[:4]
+        return related[:10]
+
+    # ============================================================
+    # SECTION 9.5 — SEO CLUSTERS
+    # Phase 6 Part 6.0
+    # ============================================================
+
+    SEO_CLUSTERS = {
+
+        "lunch": [
+
+            "lunch",
+            "business-lunch-morristown",
+            "lunch-near-headquarters-plaza",
+            "weekday-lunch-morristown",
+            "lunch-meeting-restaurant",
+            "lunch-cocktails-morristown"
+        ],
+
+        "events": [
+
+            "private-events",
+            "birthday-parties",
+            "corporate-events",
+            "holiday-parties",
+            "group-dining",
+            "rehearsal-dinners",
+            "retirement-parties",
+            "networking-events",
+            "team-dinners",
+            "graduation-parties"
+        ],
+
+        "morristown": [
+
+            "sports-bar-morristown",
+            "bars-near-headquarters-plaza",
+            "nightlife-morristown"
+        ]
+    }
 
 
     # ========================================================
