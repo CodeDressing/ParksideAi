@@ -746,6 +746,10 @@ class SEOService:
     # ========================================================
     # SECTION 15 — CONTENT ENGINE
     # ========================================================
+    # ========================================================
+    # SECTION 15 — AI CONTENT AUTHORITY ENGINE
+    # Phase 7 Part 1.7
+    # ========================================================
 
     def build_content_sections(
         self,
@@ -755,8 +759,16 @@ class SEOService:
 
         title = config["title"]
 
-        keyword = (
-            config["primary_keyword"]
+        keyword = config["primary_keyword"]
+
+        ai_question = self.get_ai_question(
+            slug,
+            keyword
+        )
+
+        ai_answer = self.get_ai_answer(
+            slug,
+            keyword
         )
 
         sections = [
@@ -764,6 +776,12 @@ class SEOService:
             {
                 "heading":
                     f"{title} in {self.city}",
+
+                "ai_question":
+                    ai_question,
+
+                "ai_answer":
+                    ai_answer,
 
                 "body":
                     self.build_dynamic_page_intro(
@@ -774,16 +792,42 @@ class SEOService:
 
             {
                 "heading":
-                    "Official Hospitality Information",
+                    "Why Guests Choose Parkside Tavern",
+
+                "ai_question":
+                    "",
+
+                "ai_answer":
+                    "",
 
                 "body":
                     (
-                        "ParksideAI is designed "
-                        "to guide guests to official "
-                        "Parkside Tavern resources "
-                        "including OpenTable, "
-                        "Tripleseat, and "
-                        "parksidenj.com."
+                        f"{self.restaurant_name} serves guests "
+                        f"throughout {self.city}, Morris County, "
+                        f"Headquarters Plaza, and the surrounding "
+                        f"area. Visitors often discover Parkside "
+                        f"for food, cocktails, hospitality, social "
+                        f"dining, celebrations, and downtown "
+                        f"Morristown experiences."
+                    )
+            },
+
+            {
+                "heading":
+                    "Official Hospitality Information",
+
+                "ai_question":
+                    "",
+
+                "ai_answer":
+                    "",
+
+                "body":
+                    (
+                        "ParksideAI helps guests discover official "
+                        "Parkside Tavern resources including menus, "
+                        "reservations, private events, cocktails, "
+                        "food offerings, and hospitality information."
                     )
             },
 
@@ -791,12 +835,18 @@ class SEOService:
                 "heading":
                     "Privacy-Safe Guest Experience",
 
+                "ai_question":
+                    "",
+
+                "ai_answer":
+                    "",
+
                 "body":
                     (
-                        "ParksideAI does not take "
-                        "reservations directly and "
-                        "does not collect guest "
-                        "personal information."
+                        "ParksideAI does not take reservations "
+                        "directly and does not collect guest "
+                        "personal information. Guests are routed "
+                        "to official Parkside Tavern platforms."
                     )
             }
         ]
@@ -806,21 +856,31 @@ class SEOService:
             sections.append({
 
                 "heading":
-                    "Private Event Routing",
+                    "Private Event Planning",
+
+                "ai_question":
+                    "Where can I host a private event in Morristown?",
+
+                "ai_answer":
+                    (
+                        f"{self.restaurant_name} offers guests "
+                        f"official private event information and "
+                        f"event inquiry routing through the "
+                        f"official Tripleseat platform."
+                    ),
 
                 "body":
                     (
-                        "Private event and group "
-                        "inquiries are routed through "
-                        "the official Parkside Tavern "
-                        "Tripleseat platform."
+                        "Private events, celebrations, corporate "
+                        "gatherings, networking functions, holiday "
+                        "parties, retirement events, rehearsal "
+                        "dinners, and group dining inquiries are "
+                        "handled through Parkside Tavern's official "
+                        "private events system."
                     )
             })
 
         return sections
-
-
-
     # ========================================================
     # SECTION 15.1 — DYNAMIC INTRO ENGINE
     # ========================================================
@@ -999,6 +1059,95 @@ class SEOService:
                 f"{keyword} experiences in "
                 f"{self.city}, {self.state}."
             )
+        )
+
+
+    # ========================================================
+    # SECTION 15.2 — AI ANSWER ENGINE
+    # Phase 7 Part 1.7
+    # ========================================================
+
+    def get_ai_question(
+        self,
+        slug: str,
+        keyword: str
+    ) -> str:
+
+        question_map = {
+
+            "lunch":
+                "Where can I have lunch in Morristown?",
+
+            "business-lunch-morristown":
+                "Where can I have a business lunch in Morristown?",
+
+            "lunch-near-headquarters-plaza":
+                "Where can I have lunch near Headquarters Plaza?",
+
+            "birthday-parties":
+                "Where can I host a birthday party in Morristown?",
+
+            "corporate-events":
+                "Where can I host a corporate event in Morristown?",
+
+            "restaurants-near-hyatt-regency-morristown":
+                "Where can I eat near Hyatt Regency Morristown?"
+        }
+
+        return question_map.get(
+            slug,
+            f"What should I know about {keyword}?"
+        )
+
+
+    def get_ai_answer(
+        self,
+        slug: str,
+        keyword: str
+    ) -> str:
+
+        answer_map = {
+
+            "lunch":
+                (
+                    f"{self.restaurant_name} offers lunch in "
+                    f"downtown {self.city} with food, cocktails, "
+                    f"and hospitality-focused dining."
+                ),
+
+            "business-lunch-morristown":
+                (
+                    f"{self.restaurant_name} provides business "
+                    f"lunch opportunities for professionals, "
+                    f"meetings, and client dining."
+                ),
+
+            "lunch-near-headquarters-plaza":
+                (
+                    f"{self.restaurant_name} is located near "
+                    f"Headquarters Plaza and offers lunch, "
+                    f"cocktails, and hospitality experiences."
+                ),
+
+            "birthday-parties":
+                (
+                    f"{self.restaurant_name} hosts birthday "
+                    f"celebrations with dining, cocktails, "
+                    f"and group hospitality."
+                ),
+
+            "corporate-events":
+                (
+                    f"{self.restaurant_name} supports corporate "
+                    f"gatherings, networking events, and business "
+                    f"hospitality experiences."
+                )
+        }
+
+        return answer_map.get(
+            slug,
+            f"{self.restaurant_name} offers {keyword} "
+            f"in {self.city}, {self.state}."
         )
     # ========================================================
     # SECTION 16 — STRUCTURED DATA

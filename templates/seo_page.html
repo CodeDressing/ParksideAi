@@ -123,15 +123,31 @@
 
                 <article class="seo-card">
 
-                    <h2>
-                        {{ section.heading }}
-                    </h2>
+    {% if section.ai_question %}
 
-                    <p>
-                        {{ section.body }}
-                    </p>
+    <div class="seo-ai-answer">
 
-                </article>
+        <h2>
+            {{ section.ai_question }}
+        </h2>
+
+        <p>
+            {{ section.ai_answer }}
+        </p>
+
+    </div>
+
+    {% endif %}
+
+    <h2>
+        {{ section.heading }}
+    </h2>
+
+    <p>
+        {{ section.body }}
+    </p>
+
+</article>
 
             {% endfor %}
 
