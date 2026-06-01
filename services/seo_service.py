@@ -297,6 +297,10 @@ class SEOService:
     # ========================================================
     # SECTION 9 — RELATED PAGE ENGINE
     # ========================================================
+    # ========================================================
+    # SECTION 9 — DYNAMIC RELATED PAGE ENGINE
+    # Phase 6 Part 9.1.2 — Dynamic Link Scoring
+    # ========================================================
 
     def get_related_pages(
         self,
@@ -305,30 +309,99 @@ class SEOService:
 
         pages = self.list_available_pages()
 
-        related = []
-
-        current_page = (
-            self.get_page_config(slug)
-        )
+        current_page = self.get_page_config(slug)
 
         if not current_page:
             return []
 
-        current_intent = (
-            current_page["intent"]
-        )
+        scored_pages = []
+
+        current_intent = current_page["intent"]
+        current_cluster = self.get_cluster_for_slug(slug)
+
+        popular_slugs = [
+
+            "lunch",
+            "private-events",
+            "business-lunch-morristown",
+            "restaurants-near-headquarters-plaza",
+            "restaurants-near-hyatt-regency-morristown",
+            "birthday-parties",
+            "corporate-events",
+            "cocktails",
+            "brunch",
+            "group-dining"
+        ]
+
+        location_slugs = [
+
+            "restaurants-near-headquarters-plaza",
+            "restaurants-near-hyatt-regency-morristown",
+            "restaurants-near-morristown-green",
+            "downtown-morristown-restaurant",
+            "restaurants-near-mayo-performing-arts-center",
+            "bars-near-headquarters-plaza",
+            "nightlife-morristown",
+            "sports-bar-morristown"
+        ]
 
         for page in pages:
 
             if page["slug"] == slug:
                 continue
 
+            score = 0
+
+            page_cluster = self.get_cluster_for_slug(
+                page["slug"]
+            )
+
+            if current_cluster and page_cluster == current_cluster:
+                score += 100
+
             if page["intent"] == current_intent:
+                score += 50
 
-                related.append(page)
+            if page["slug"] in location_slugs and slug in location_slugs:
+                score += 40
 
-        return related[:10]
+            if page["slug"] in popular_slugs:
+                score += 20
 
+            if self.city.lower() in page["primary_keyword"].lower():
+                score += 10
+
+            if score > 0:
+
+                scored_pages.append({
+                    **page,
+                    "related_score": score
+                })
+
+        scored_pages.sort(
+            key=lambda page: page["related_score"],
+            reverse=True
+        )
+
+        return scored_pages[:10]
+
+
+    # ========================================================
+    # SECTION 9.1 — CLUSTER LOOKUP ENGINE
+    # Phase 6 Part 9.1.2
+    # ========================================================
+
+    def get_cluster_for_slug(
+        self,
+        slug: str
+    ) -> Optional[str]:
+
+        for cluster_name, cluster_slugs in self.SEO_CLUSTERS.items():
+
+            if slug in cluster_slugs:
+                return cluster_name
+
+        return None
     # ============================================================
     # SECTION 9.5 — SEO CLUSTERS
     # Phase 6 Part 6.0
