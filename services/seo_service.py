@@ -930,6 +930,10 @@ class SEOService:
     # ========================================================
     # SECTION 16 — STRUCTURED DATA
     # ========================================================
+    # ========================================================
+    # SECTION 16 — STRUCTURED DATA GRAPH ENGINE
+    # Phase 6 Part 9.1.0 — Schema Graph Upgrade
+    # ========================================================
 
     def build_structured_data(
         self,
@@ -937,145 +941,225 @@ class SEOService:
         config: Optional[Dict[str, Any]] = None
     ) -> Dict[str, Any]:
 
-        schema = dict(
-            settings.STRUCTURED_DATA_DEFAULTS
-        )
-        schema["@type"] = "FAQPage"
-
-        schema["description"] = (
-            settings.SEO_DEFAULT_DESCRIPTION
+        page_title = (
+            config["title"]
+            if config
+            else self.restaurant_name
         )
 
-        schema["sameAs"] = [
+        primary_keyword = (
+            config["primary_keyword"]
+            if config
+            else "Parkside Tavern Morristown"
+        )
 
-            self.main_website,
+        page_url = (
+            f"https://parksideai.onrender.com/seo/{slug}"
+        )
 
-            self.reservation_link,
+        page_description = (
+            f"Explore {primary_keyword} with "
+            f"{self.restaurant_name} in "
+            f"{self.city}, {self.state}."
+        )
 
-            self.private_events_link
-        ]
+        organization_id = (
+            f"{self.main_website}#organization"
+        )
 
-        if config:
+        restaurant_id = (
+            f"{self.main_website}#restaurant"
+        )
 
-            schema["name"] = (
+        website_id = (
+            "https://parksideai.onrender.com/#website"
+        )
 
+        webpage_id = (
+            f"{page_url}#webpage"
+        )
+
+        faq_id = (
+            f"{page_url}#faq"
+        )
+
+        breadcrumb_id = (
+            f"{page_url}#breadcrumb"
+        )
+
+        organization_schema = {
+            "@type": "Organization",
+            "@id": organization_id,
+            "name": self.restaurant_name,
+            "url": self.main_website,
+            "sameAs": [
+                self.main_website,
+                self.reservation_link,
+                self.private_events_link
+            ]
+        }
+
+        restaurant_schema = {
+            "@type": [
+                "Restaurant",
+                "LocalBusiness"
+            ],
+            "@id": restaurant_id,
+            "name": self.restaurant_name,
+            "url": self.main_website,
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "9 Speedwell Ave",
+                "addressLocality": self.city,
+                "addressRegion": self.state,
+                "postalCode": "07960",
+                "addressCountry": "US"
+            },
+            "servesCuisine": "American",
+            "priceRange": "$$",
+            "parentOrganization": {
+                "@id": organization_id
+            },
+            "sameAs": [
+                self.main_website,
+                self.reservation_link,
+                self.private_events_link
+            ]
+        }
+
+        website_schema = {
+            "@type": "WebSite",
+            "@id": website_id,
+            "name": "ParksideAI",
+            "url": "https://parksideai.onrender.com/",
+            "publisher": {
+                "@id": organization_id
+            },
+            "about": {
+                "@id": restaurant_id
+            }
+        }
+
+        webpage_schema = {
+            "@type": "WebPage",
+            "@id": webpage_id,
+            "url": page_url,
+            "name": (
+                f"{page_title} | "
                 f"{self.restaurant_name} "
-                f"- {config['title']}"
-            )
-
-            schema["keywords"] = [
-
-                config["primary_keyword"],
-
+                f"{self.city} {self.state}"
+            ),
+            "description": page_description,
+            "isPartOf": {
+                "@id": website_id
+            },
+            "about": {
+                "@id": restaurant_id
+            },
+            "mainEntity": {
+                "@id": faq_id
+            },
+            "breadcrumb": {
+                "@id": breadcrumb_id
+            },
+            "keywords": [
+                primary_keyword,
                 *settings.SEO_PRIMARY_KEYWORDS[:8]
             ]
+        }
 
-            schema["mainEntity"] = [
-
+        faq_schema = {
+            "@type": "FAQPage",
+            "@id": faq_id,
+            "mainEntity": [
                 {
                     "@type": "Question",
-
-                    "name":
-                        "Does Parkside Tavern take reservations?",
-
+                    "name": "Does Parkside Tavern take reservations?",
                     "acceptedAnswer": {
                         "@type": "Answer",
-
-                        "text":
-                            (
-                                "Yes. Guests can make official "
-                                "reservations through Parkside "
-                                "Tavern's OpenTable platform."
-                            )
+                        "text": (
+                            "Yes. Guests can make official reservations "
+                            "through Parkside Tavern's OpenTable platform. "
+                            "ParksideAI does not take reservations directly."
+                        )
                     }
                 },
-
                 {
                     "@type": "Question",
-
-                    "name":
-                        "Does Parkside Tavern host private events?",
-
+                    "name": "Does Parkside Tavern host private events?",
                     "acceptedAnswer": {
                         "@type": "Answer",
-
-                        "text":
-                            (
-                                "Yes. Parkside Tavern offers "
-                                "private event and group dining "
-                                "inquiries through the official "
-                                "Tripleseat platform."
-                            )
+                        "text": (
+                            "Yes. Parkside Tavern offers private event "
+                            "and group dining inquiries through the "
+                            "official Tripleseat platform."
+                        )
                     }
                 },
-
                 {
                     "@type": "Question",
-
-                    "name":
-                        "Where is Parkside Tavern located?",
-
+                    "name": "Where is Parkside Tavern located?",
                     "acceptedAnswer": {
                         "@type": "Answer",
-
-                        "text":
-                            (
-                                "Parkside Tavern is located "
-                                "in Morristown, New Jersey."
-                            )
+                        "text": (
+                            "Parkside Tavern is located at "
+                            "9 Speedwell Ave in Morristown, New Jersey, "
+                            "near Headquarters Plaza."
+                        )
                     }
                 },
-
                 {
                     "@type": "Question",
-
-                    "name":
-                        "Does Parkside Tavern offer brunch and cocktails?",
-
+                    "name": "Does Parkside Tavern offer food, drinks, brunch, lunch, and cocktails?",
                     "acceptedAnswer": {
                         "@type": "Answer",
-
-                        "text":
-                            (
-                                "Yes. Parkside Tavern offers "
-                                "brunch, cocktails, food menus, "
-                                "and hospitality-focused dining "
-                                "experiences."
-                            )
+                        "text": (
+                            "Yes. Parkside Tavern offers food, drinks, "
+                            "brunch, lunch discovery, cocktails, and "
+                            "hospitality-focused dining experiences "
+                            "in Morristown NJ."
+                        )
                     }
                 }
             ]
-            schema["breadcrumb"] = {
-                "@type": "BreadcrumbList",
+        }
 
-                "itemListElement": [
+        breadcrumb_schema = {
+            "@type": "BreadcrumbList",
+            "@id": breadcrumb_id,
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": self.main_website
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "SEO Pages",
+                    "item": "https://parksideai.onrender.com/seo/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": page_title,
+                    "item": page_url
+                }
+            ]
+        }
 
-                    {
-                        "@type": "ListItem",
-                        "position": 1,
-                        "name": "Home",
-                        "item": self.main_website
-                    },
-
-                    {
-                        "@type": "ListItem",
-                        "position": 2,
-                        "name": "SEO Pages",
-                        "item": f"{self.main_website}seo/"
-                    },
-
-                    {
-                        "@type": "ListItem",
-                        "position": 3,
-                        "name": config["title"],
-                        "item": f"{self.main_website}seo/{slug}"
-                    }
-                ]
-            }
-
-        return schema
-
-
+        return {
+            "@context": "https://schema.org",
+            "@graph": [
+                organization_schema,
+                restaurant_schema,
+                website_schema,
+                webpage_schema,
+                faq_schema,
+                breadcrumb_schema
+            ]
+        }
     # ========================================================
     # SECTION 17 — SEO INDEX PAYLOAD
     # ========================================================
