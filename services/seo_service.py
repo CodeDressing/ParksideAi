@@ -712,62 +712,168 @@ class SEOService:
     # ========================================================
     # SECTION 15.1 — DYNAMIC INTRO ENGINE
     # ========================================================
+    # ========================================================
+    # SECTION 15.1 — DYNAMIC INTRO ENGINE
+    # Phase 6.7 + 6.8 Super Upgrade
+    # ========================================================
 
     def build_dynamic_page_intro(
-        self,
-        slug: str,
-        keyword: str
+            self,
+            slug: str,
+            keyword: str
     ) -> str:
 
         intro_map = {
 
-            "private-events":
-                (
-                    f"{self.restaurant_name} offers "
-                    f"private event experiences in "
-                    f"{self.city} for birthdays, "
-                    f"corporate gatherings, holiday "
-                    f"parties, and group celebrations."
-                ),
+            # ==================================================
+            # LUNCH CLUSTER
+            # ==================================================
 
-            "brunch":
-                (
-                    f"Guests exploring brunch in "
-                    f"{self.city} can discover "
-                    f"cocktails, hospitality, and "
-                    f"weekend dining experiences at "
-                    f"{self.restaurant_name}."
-                ),
             "lunch":
                 (
                     f"{self.restaurant_name} offers lunch in "
                     f"{self.city} for professionals, visitors, "
-                    f"and guests looking for food, cocktails, "
-                    f"and hospitality near Headquarters Plaza."
+                    f"hotel guests, and locals looking for food, "
+                    f"cocktails, and hospitality near "
+                    f"Headquarters Plaza."
+                ),
+
+            "business-lunch-morristown":
+                (
+                    f"{self.restaurant_name} offers business lunch "
+                    f"experiences in {self.city} for meetings, "
+                    f"networking, client entertainment, and "
+                    f"professional dining."
+                ),
+
+            "lunch-near-headquarters-plaza":
+                (
+                    f"Guests searching for lunch near "
+                    f"Headquarters Plaza can discover food, "
+                    f"cocktails, and hospitality at "
+                    f"{self.restaurant_name}."
+                ),
+
+            "weekday-lunch-morristown":
+                (
+                    f"{self.restaurant_name} serves weekday lunch "
+                    f"in {self.city} for professionals, visitors, "
+                    f"and guests seeking a downtown dining option."
+                ),
+
+            "lunch-meeting-restaurant":
+                (
+                    f"{self.restaurant_name} provides a lunch "
+                    f"meeting destination for business guests, "
+                    f"corporate lunches, and professional gatherings."
+                ),
+
+            "lunch-cocktails-morristown":
+                (
+                    f"{self.restaurant_name} combines lunch, "
+                    f"cocktails, hospitality, and social dining "
+                    f"in downtown {self.city}."
+                ),
+
+            # ==================================================
+            # EVENT CLUSTER
+            # ==================================================
+
+            "birthday-parties":
+                (
+                    f"{self.restaurant_name} hosts birthday "
+                    f"celebrations in {self.city} with dining, "
+                    f"cocktails, hospitality, and group experiences."
+                ),
+
+            "rehearsal-dinners":
+                (
+                    f"Guests planning rehearsal dinners in "
+                    f"{self.city} can explore hospitality and "
+                    f"group dining experiences at "
+                    f"{self.restaurant_name}."
+                ),
+
+            "corporate-events":
+                (
+                    f"{self.restaurant_name} supports corporate "
+                    f"events, business gatherings, networking "
+                    f"functions, and professional hospitality."
+                ),
+
+            "holiday-parties":
+                (
+                    f"{self.restaurant_name} provides holiday "
+                    f"party experiences for organizations, "
+                    f"friends, families, and businesses."
+                ),
+
+            "retirement-parties":
+                (
+                    f"Guests planning retirement celebrations "
+                    f"in {self.city} can explore food, drinks, "
+                    f"and hospitality at {self.restaurant_name}."
+                ),
+
+            "networking-events":
+                (
+                    f"{self.restaurant_name} offers networking "
+                    f"event opportunities for professionals and "
+                    f"organizations throughout Morris County."
+                ),
+
+            "team-dinners":
+                (
+                    f"{self.restaurant_name} provides team dinner "
+                    f"experiences for businesses, organizations, "
+                    f"and social groups."
+                ),
+
+            "graduation-parties":
+                (
+                    f"{self.restaurant_name} hosts graduation "
+                    f"celebrations for families, students, "
+                    f"friends, and community gatherings."
+                ),
+
+            # ==================================================
+            # EXISTING CORE PAGES
+            # ==================================================
+
+            "private-events":
+                (
+                    f"{self.restaurant_name} offers private event "
+                    f"experiences in {self.city} for birthdays, "
+                    f"corporate gatherings, holiday parties, and "
+                    f"group celebrations."
+                ),
+
+            "brunch":
+                (
+                    f"Guests exploring brunch in {self.city} can "
+                    f"discover cocktails, hospitality, and weekend "
+                    f"dining experiences at {self.restaurant_name}."
                 ),
 
             "happy-hour":
                 (
-                    f"{self.restaurant_name} offers "
-                    f"happy hour and cocktail-focused "
-                    f"hospitality experiences in "
+                    f"{self.restaurant_name} offers happy hour and "
+                    f"cocktail-focused hospitality experiences in "
                     f"{self.city}, {self.state}."
                 ),
 
             "cocktails":
                 (
-                    f"{self.restaurant_name} is a "
-                    f"Morristown cocktail destination "
-                    f"offering drinks, nightlife, "
-                    f"social dining, and hospitality."
+                    f"{self.restaurant_name} is a Morristown "
+                    f"cocktail destination offering drinks, "
+                    f"nightlife, social dining, and hospitality."
                 ),
 
             "group-dining":
                 (
-                    f"Guests searching for group dining "
-                    f"in {self.city} can explore "
-                    f"food, cocktails, celebrations, "
-                    f"and social hospitality experiences "
+                    f"Guests searching for group dining in "
+                    f"{self.city} can explore food, cocktails, "
+                    f"celebrations, and hospitality experiences "
                     f"with {self.restaurant_name}."
                 )
         }
@@ -782,8 +888,6 @@ class SEOService:
                 f"{self.city}, {self.state}."
             )
         )
-
-
     # ========================================================
     # SECTION 16 — STRUCTURED DATA
     # ========================================================

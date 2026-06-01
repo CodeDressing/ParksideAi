@@ -189,7 +189,46 @@ class Settings:
            "intent": "restaurant_info",
            "official_link": OFFICIAL_FOOD_MENU_LINK,
            "routing_action": "send_to_official_website"
-},
+        },
+        "business-lunch-morristown": {
+            "title": "Business Lunch Morristown",
+            "primary_keyword": "business lunch morristown",
+            "intent": "restaurant_info",
+            "official_link": OFFICIAL_FOOD_MENU_LINK,
+            "routing_action": "send_to_official_website"
+        },
+
+        "lunch-near-headquarters-plaza": {
+            "title": "Lunch Near Headquarters Plaza",
+            "primary_keyword": "lunch near headquarters plaza",
+            "intent": "restaurant_info",
+            "official_link": OFFICIAL_FOOD_MENU_LINK,
+            "routing_action": "send_to_official_website"
+        },
+
+        "weekday-lunch-morristown": {
+            "title": "Weekday Lunch Morristown",
+            "primary_keyword": "weekday lunch morristown",
+            "intent": "restaurant_info",
+            "official_link": OFFICIAL_FOOD_MENU_LINK,
+            "routing_action": "send_to_official_website"
+        },
+
+        "lunch-meeting-restaurant": {
+            "title": "Lunch Meeting Restaurant",
+            "primary_keyword": "lunch meeting restaurant morristown",
+            "intent": "restaurant_info",
+            "official_link": OFFICIAL_FOOD_MENU_LINK,
+            "routing_action": "send_to_official_website"
+        },
+
+        "lunch-cocktails-morristown": {
+            "title": "Lunch Cocktails Morristown",
+            "primary_keyword": "lunch cocktails morristown",
+            "intent": "restaurant_info",
+            "official_link": OFFICIAL_DRINK_MENU_LINK,
+            "routing_action": "send_to_official_website"
+        },
         "brunch": {
             "title": "Brunch",
             "primary_keyword": "brunch in Morristown",
