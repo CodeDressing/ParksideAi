@@ -44,11 +44,19 @@ seo_bp = Blueprint(
 # SECTION 3 — SEO DISCOVERY INDEX
 # ============================================================
 
+# ============================================================
+# SECTION 3 — SEO DISCOVERY INDEX
+# Phase 6 Part 5.2 Launch Cluster Expansion
+# ============================================================
+
 SEO_DISCOVERY_GROUPS = [
 
+    # ========================================================
+    # EVENT CLUSTER
+    # ========================================================
+
     {
-        "category":
-            "Events",
+        "category": "Events",
 
         "pages": [
 
@@ -56,26 +64,76 @@ SEO_DISCOVERY_GROUPS = [
             "birthday-parties",
             "corporate-events",
             "holiday-parties",
-            "group-dining"
+            "group-dining",
+
+            "rehearsal-dinners",
+            "retirement-parties",
+            "networking-events",
+            "team-dinners",
+            "graduation-parties"
         ]
     },
 
+    # ========================================================
+    # LUNCH CLUSTER
+    # ========================================================
+
     {
-        "category":
-            "Dining",
+        "category": "Lunch Discovery",
+
+        "pages": [
+
+            "lunch",
+            "business-lunch-morristown",
+            "lunch-near-headquarters-plaza",
+            "weekday-lunch-morristown",
+            "lunch-meeting-restaurant",
+            "lunch-cocktails-morristown"
+        ]
+    },
+
+    # ========================================================
+    # DINING CLUSTER
+    # ========================================================
+
+    {
+        "category": "Dining",
 
         "pages": [
 
             "brunch",
+            "weekend-brunch-morristown",
+
             "dinner",
+
             "happy-hour",
-            "cocktails"
+
+            "cocktails",
+            "craft-cocktails-morristown"
         ]
     },
 
+    # ========================================================
+    # MORRISTOWN DISCOVERY
+    # ========================================================
+
     {
-        "category":
-            "Hospitality",
+        "category": "Morristown Discovery",
+
+        "pages": [
+
+            "sports-bar-morristown",
+            "bars-near-headquarters-plaza",
+            "nightlife-morristown"
+        ]
+    },
+
+    # ========================================================
+    # HOSPITALITY
+    # ========================================================
+
+    {
+        "category": "Hospitality",
 
         "pages": [
 
@@ -83,7 +141,6 @@ SEO_DISCOVERY_GROUPS = [
         ]
     }
 ]
-
 
 # ============================================================
 # SECTION 4 — SEO ENGINE STATUS
