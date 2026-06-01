@@ -71,8 +71,21 @@ SEO_DISCOVERY_GROUPS = [
             "networking-events",
             "team-dinners",
             "graduation-parties"
+
         ]
     },
+{
+    "category": "Morristown Locations",
+
+    "pages": [
+
+        "restaurants-near-headquarters-plaza",
+        "restaurants-near-hyatt-regency-morristown",
+        "restaurants-near-morristown-green",
+        "downtown-morristown-restaurant",
+        "restaurants-near-mayo-performing-arts-center"
+    ]
+},
 
     # ========================================================
     # LUNCH CLUSTER

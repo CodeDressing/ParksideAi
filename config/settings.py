@@ -311,7 +311,85 @@ class Settings:
             "intent": "restaurant_info",
             "official_link": OFFICIAL_MAIN_WEBSITE,
             "routing_action": "send_to_official_website"
-        }
+        },
+        "rehearsal-dinners": {
+            "title": "Rehearsal Dinners",
+            "primary_keyword": "rehearsal dinner morristown",
+            "intent": "private_event",
+            "official_link": OFFICIAL_PRIVATE_EVENTS_LINK,
+            "routing_action": "send_to_tripleseat"
+        },
+
+        "retirement-parties": {
+            "title": "Retirement Parties",
+            "primary_keyword": "retirement party morristown",
+            "intent": "private_event",
+            "official_link": OFFICIAL_PRIVATE_EVENTS_LINK,
+            "routing_action": "send_to_tripleseat"
+        },
+
+        "networking-events": {
+            "title": "Networking Events",
+            "primary_keyword": "networking events morristown",
+            "intent": "private_event",
+            "official_link": OFFICIAL_PRIVATE_EVENTS_LINK,
+            "routing_action": "send_to_tripleseat"
+        },
+
+        "team-dinners": {
+            "title": "Team Dinners",
+            "primary_keyword": "team dinners morristown",
+            "intent": "private_event",
+            "official_link": OFFICIAL_PRIVATE_EVENTS_LINK,
+            "routing_action": "send_to_tripleseat"
+        },
+
+        "graduation-parties": {
+            "title": "Graduation Parties",
+            "primary_keyword": "graduation parties morristown",
+            "intent": "private_event",
+            "official_link": OFFICIAL_PRIVATE_EVENTS_LINK,
+            "routing_action": "send_to_tripleseat"
+        },
+        "restaurants-near-headquarters-plaza": {
+            "title": "Restaurants Near Headquarters Plaza",
+            "primary_keyword": "restaurants near headquarters plaza",
+            "intent": "restaurant_info",
+            "official_link": OFFICIAL_MAIN_WEBSITE,
+            "routing_action": "send_to_official_website"
+        },
+
+        "restaurants-near-hyatt-regency-morristown": {
+            "title": "Restaurants Near Hyatt Regency Morristown",
+            "primary_keyword": "restaurants near hyatt regency morristown",
+            "intent": "restaurant_info",
+            "official_link": OFFICIAL_MAIN_WEBSITE,
+            "routing_action": "send_to_official_website"
+        },
+
+        "restaurants-near-morristown-green": {
+            "title": "Restaurants Near Morristown Green",
+            "primary_keyword": "restaurants near morristown green",
+            "intent": "restaurant_info",
+            "official_link": OFFICIAL_MAIN_WEBSITE,
+            "routing_action": "send_to_official_website"
+        },
+
+        "downtown-morristown-restaurant": {
+            "title": "Downtown Morristown Restaurant",
+            "primary_keyword": "downtown morristown restaurant",
+            "intent": "restaurant_info",
+            "official_link": OFFICIAL_MAIN_WEBSITE,
+            "routing_action": "send_to_official_website"
+        },
+
+        "restaurants-near-mayo-performing-arts-center": {
+            "title": "Restaurants Near Mayo Performing Arts Center",
+            "primary_keyword": "restaurants near mayo performing arts center",
+            "intent": "restaurant_info",
+            "official_link": OFFICIAL_MAIN_WEBSITE,
+            "routing_action": "send_to_official_website"
+        },
     }
 
     # ============================================================
