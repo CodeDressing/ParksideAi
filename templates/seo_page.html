@@ -31,9 +31,10 @@
         content="{{ page.meta.robots if page.meta and page.meta.robots else 'index, follow' }}"
     >
 
-    {% if page.meta and page.meta.canonical %}
-        <link rel="canonical" href="{{ page.meta.canonical }}">
-    {% endif %}
+    <link
+    rel="canonical"
+    href="https://parksideai.onrender.com/seo/{{ page.slug }}"
+>
 
 
     <!-- =====================================================

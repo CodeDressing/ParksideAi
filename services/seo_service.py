@@ -561,7 +561,7 @@ class SEOService:
                     description[:300],
 
                 "canonical":
-                    self.main_website,
+    f"https://parksideai.onrender.com/seo/{page_type}",
 
                 "robots":
                     "index, follow",
