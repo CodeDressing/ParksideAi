@@ -164,15 +164,49 @@ def build_full_restaurant_context(
     routing_instruction: str
 ) -> str:
     """
-    Combine official knowledge, intent analysis, routing rules,
-    and privacy boundaries into one context block.
+    Combine official knowledge, semantic intelligence,
+    routing rules, and privacy boundaries.
     """
+
+    semantic_summary = intent_analysis.get(
+        "semantic_summary",
+        "No semantic summary available."
+    )
+
+    confidence_score = intent_analysis.get(
+        "confidence_score",
+        0
+    )
+
+    opportunity_type = intent_analysis.get(
+        "opportunity_type",
+        "general_guest_support"
+    )
+
+    entities = intent_analysis.get(
+        "entities",
+        {}
+    )
 
     return f"""
 Official Parkside Tavern Knowledge:
 {restaurant_context}
 
-Detected Guest Intent:
+Semantic Hospitality Analysis:
+
+Intent Confidence Score:
+{confidence_score}
+
+Opportunity Classification:
+{opportunity_type}
+
+Extracted Hospitality Entities:
+{json.dumps(entities, indent=2)}
+
+Semantic Summary:
+{semantic_summary}
+
+Full Intent Analysis:
 {json.dumps(intent_analysis, indent=2)}
 
 Guest Intent Routing Instruction:
@@ -181,7 +215,6 @@ Guest Intent Routing Instruction:
 Platform Safety Instruction:
 {build_platform_safety_instruction()}
 """
-
 
 # ============================================================
 # 6. CONVERSATION HISTORY SANITIZER
@@ -299,7 +332,10 @@ def generate_chat_response(
         intent_analysis=intent_analysis,
         routing_instruction=routing_instruction
     )
-
+    print(
+        "SEMANTIC ANALYSIS:",
+        json.dumps(intent_analysis, indent=2)
+    )
     messages = build_messages(
         user_message=user_message.strip(),
         restaurant_context=full_context,
@@ -310,7 +346,7 @@ def generate_chat_response(
         response = client.chat.completions.create(
             model=settings.OPENAI_MODEL,
             messages=messages,
-            temperature=settings.OPENAI_TEMPERATURE,
+            temperature=min(settings.OPENAI_TEMPERATURE, 0.4),
             max_tokens=settings.OPENAI_MAX_TOKENS,
         )
 
