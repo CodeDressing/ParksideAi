@@ -1,23 +1,19 @@
 """
 ParksideAI Guest Intent Router
-Phase 3 Upgrade
+Phase 7 Part 2.0 — Hospitality Semantic Intelligence Engine
 
-IMPORTANT:
 This file does NOT capture leads.
 This file does NOT save guest information.
 This file does NOT take reservations.
 
-Its job is to understand why a guest is chatting and route them
-to the correct official Parkside Tavern destination.
-
-Official routing:
-- General restaurant information -> https://parksidenj.com/
-- Reservations -> https://www.opentable.com/r/parkside-tavern-morristown
-- Private events -> https://parksidetavern.tripleseat.com/party_request/45075
+Its job is to understand guest intent, detect hospitality context,
+score semantic meaning, and route guests to the correct official
+Parkside Tavern destination.
 """
 
 from dataclasses import dataclass, asdict
-from typing import Dict, List
+from typing import Dict, List, Any
+import re
 
 
 # ============================================================
@@ -45,168 +41,103 @@ PRIVACY_MODE = {
 
 
 # ============================================================
-# 3. INTENT KEYWORDS
+# 3. SEMANTIC INTENT VOCABULARY
 # ============================================================
 
 INTENT_KEYWORDS = {
     "reservation": [
-        "reservation",
-        "reservations",
-        "reserve",
-        "book a table",
-        "book table",
-        "table for",
-        "table tonight",
-        "opentable",
-        "dinner reservation",
-        "brunch reservation",
-        "make a reservation",
-        "can i book",
-        "can we book",
-        "do you have availability",
-        "available tonight",
-        "available tomorrow",
-        "walk in",
-        "walk-ins",
-        "walkins",
-        "party of",
-        "seating",
-        "sit down",
+        "reservation", "reservations", "reserve", "book a table", "book table",
+        "grab a table", "get a table", "table for", "table tonight",
+        "opentable", "dinner reservation", "brunch reservation",
+        "make a reservation", "can i book", "can we book",
+        "do you have availability", "available tonight", "available tomorrow",
+        "walk in", "walk-ins", "walkins", "party of", "seating", "sit down",
+        "come in tonight", "eat tonight", "dinner for two", "lunch for two",
     ],
     "private_event": [
-        "private event",
-        "private events",
-        "event",
-        "events",
-        "party",
-        "birthday",
-        "birthday party",
-        "corporate",
-        "corporate event",
-        "company party",
-        "holiday party",
-        "large group",
-        "group dinner",
-        "baby shower",
-        "bridal shower",
-        "graduation",
-        "fundraiser",
-        "rehearsal dinner",
-        "retirement party",
-        "networking event",
-        "event space",
-        "private room",
-        "semi-private",
-        "buyout",
-        "catering",
-        "celebration",
-        "host an event",
-        "book an event",
-        "plan an event",
+        "private event", "private events", "event", "events", "party",
+        "birthday", "birthday party", "corporate", "corporate event",
+        "company party", "team dinner", "office party", "office gathering",
+        "holiday party", "large group", "group dinner", "baby shower",
+        "bridal shower", "graduation", "fundraiser", "rehearsal dinner",
+        "retirement party", "networking event", "event space", "private room",
+        "semi-private", "buyout", "catering", "celebration",
+        "host an event", "book an event", "plan an event", "group of",
     ],
     "menu": [
-        "menu",
-        "food",
-        "eat",
-        "dinner",
-        "lunch",
-        "brunch",
-        "kids menu",
-        "dessert",
-        "appetizers",
-        "burger",
-        "steak",
-        "seafood",
-        "salad",
-        "gluten free",
-        "gluten-free",
-        "vegetarian",
-        "vegan",
-        "allergy",
-        "allergies",
+        "menu", "food", "eat", "dinner", "lunch", "brunch", "kids menu",
+        "dessert", "appetizers", "burger", "steak", "seafood", "salad",
+        "gluten free", "gluten-free", "vegetarian", "vegan", "allergy",
+        "allergies", "what do you serve", "food options",
     ],
     "drinks": [
-        "drinks",
-        "drink menu",
-        "cocktails",
-        "cocktail",
-        "beer",
-        "wine",
-        "happy hour",
-        "bar",
-        "mocktail",
-        "mocktails",
-        "draft beer",
-        "beer on tap",
-        "margarita",
-        "espresso martini",
+        "drinks", "drink menu", "cocktails", "cocktail", "beer", "wine",
+        "happy hour", "bar", "mocktail", "mocktails", "draft beer",
+        "beer on tap", "margarita", "espresso martini", "after work drinks",
     ],
     "location": [
-        "where are you",
-        "location",
-        "address",
-        "directions",
-        "parking",
-        "park",
-        "headquarters plaza",
-        "morristown",
-        "nearby",
-        "near me",
+        "where are you", "location", "address", "directions", "parking",
+        "park", "headquarters plaza", "morristown", "nearby", "near me",
+        "how do i get there",
     ],
     "hours": [
-        "hours",
-        "open",
-        "close",
-        "closing",
-        "opening",
-        "what time",
-        "kitchen close",
-        "bar close",
-        "open today",
-        "open tomorrow",
+        "hours", "open", "close", "closing", "opening", "what time",
+        "kitchen close", "bar close", "open today", "open tomorrow",
         "holiday hours",
     ],
     "sports": [
-        "sports",
-        "game",
-        "football",
-        "baseball",
-        "basketball",
-        "hockey",
-        "soccer",
-        "ufc",
-        "boxing",
-        "tv",
-        "tvs",
-        "watch",
+        "sports", "game", "football", "baseball", "basketball", "hockey",
+        "soccer", "ufc", "boxing", "tv", "tvs", "watch", "watch the game",
     ],
     "service_help": [
-        "manager",
-        "complaint",
-        "issue",
-        "problem",
-        "charged",
-        "receipt",
-        "lost",
-        "left something",
-        "call me",
-        "contact",
-        "speak to someone",
+        "manager", "complaint", "issue", "problem", "charged", "receipt",
+        "lost", "left something", "call me", "contact", "speak to someone",
     ],
     "general": [
-        "website",
-        "park side",
-        "parkside",
-        "parkside tavern",
-        "info",
-        "information",
-        "help",
+        "website", "park side", "parkside", "parkside tavern", "info",
+        "information", "help",
     ],
 }
 
 
 # ============================================================
-# 4. INTENT PRIORITY
+# 4. HOSPITALITY ENTITY VOCABULARY
+# ============================================================
+
+ENTITY_PATTERNS = {
+    "occasion": {
+        "birthday": ["birthday", "bday"],
+        "anniversary": ["anniversary"],
+        "corporate": ["corporate", "company", "office", "team", "business"],
+        "holiday_party": ["holiday party", "christmas party", "winter party"],
+        "fundraiser": ["fundraiser", "charity"],
+        "graduation": ["graduation", "graduate"],
+        "date_night": ["date night", "romantic", "dinner date"],
+        "family_meal": ["family", "kids", "parents"],
+    },
+    "meal_period": {
+        "brunch": ["brunch"],
+        "lunch": ["lunch", "midday", "afternoon"],
+        "dinner": ["dinner", "tonight", "evening"],
+        "happy_hour": ["happy hour", "after work"],
+    },
+    "beverage_interest": {
+        "cocktails": ["cocktail", "cocktails", "martini", "margarita"],
+        "beer": ["beer", "draft", "tap"],
+        "wine": ["wine"],
+        "mocktails": ["mocktail", "mocktails"],
+    },
+    "guest_need": {
+        "reservation": ["book", "reserve", "reservation", "table"],
+        "private_event": ["event", "party", "private room", "buyout"],
+        "menu": ["menu", "food", "eat"],
+        "support": ["manager", "receipt", "lost", "complaint"],
+    },
+}
+
+
+# ============================================================
+# 5. INTENT PRIORITY AND ROUTING
 # ============================================================
 
 INTENT_PRIORITY = [
@@ -220,11 +151,6 @@ INTENT_PRIORITY = [
     "sports",
     "general",
 ]
-
-
-# ============================================================
-# 5. INTENT ROUTING CONFIG
-# ============================================================
 
 INTENT_ROUTING = {
     "reservation": {
@@ -300,6 +226,11 @@ class IntentAnalysis:
     should_collect_guest_info: bool
     should_store_guest_info: bool
     should_take_reservation: bool
+    confidence_score: int
+    intent_scores: Dict[str, int]
+    entities: Dict[str, Any]
+    opportunity_type: str
+    semantic_summary: str
 
 
 # ============================================================
@@ -310,21 +241,15 @@ def normalize_message(user_message: str) -> str:
     if not user_message:
         return ""
 
-    return user_message.lower().strip()
+    return re.sub(r"\s+", " ", user_message.lower().strip())
 
 
 # ============================================================
-# 8. KEYWORD MATCHING
+# 8. SEMANTIC MATCHING
 # ============================================================
 
 def find_keyword_matches(message: str, keywords: List[str]) -> List[str]:
-    matches = []
-
-    for keyword in keywords:
-        if keyword in message:
-            matches.append(keyword)
-
-    return matches
+    return [keyword for keyword in keywords if keyword in message]
 
 
 def score_intents(message: str) -> Dict[str, Dict[str, object]]:
@@ -332,10 +257,20 @@ def score_intents(message: str) -> Dict[str, Dict[str, object]]:
 
     for intent, keywords in INTENT_KEYWORDS.items():
         matched_keywords = find_keyword_matches(message, keywords)
+        score = len(matched_keywords) * 10
 
-        if matched_keywords:
+        if intent == "private_event" and detect_party_size(message) >= 10:
+            score += 25
+
+        if intent == "reservation" and detect_party_size(message) in range(1, 10):
+            score += 15
+
+        if intent == "drinks" and "happy hour" in message:
+            score += 20
+
+        if matched_keywords or score > 0:
             scored_results[intent] = {
-                "score": len(matched_keywords),
+                "score": score,
                 "matched_keywords": matched_keywords,
             }
 
@@ -346,41 +281,157 @@ def choose_primary_intent(scored_results: Dict[str, Dict[str, object]]) -> str:
     if not scored_results:
         return "general"
 
+    highest_score = max(
+        result["score"] for result in scored_results.values()
+    )
+
+    top_intents = [
+        intent for intent, result in scored_results.items()
+        if result["score"] == highest_score
+    ]
+
     for intent in INTENT_PRIORITY:
-        if intent in scored_results:
+        if intent in top_intents:
             return intent
 
     return "general"
 
 
 # ============================================================
-# 9. MAIN INTENT ANALYZER
+# 9. ENTITY EXTRACTION
+# ============================================================
+
+def detect_party_size(message: str) -> int:
+    patterns = [
+        r"party of (\d+)",
+        r"group of (\d+)",
+        r"for (\d+) people",
+        r"for (\d+)",
+        r"(\d+) people",
+        r"(\d+) guests",
+    ]
+
+    for pattern in patterns:
+        match = re.search(pattern, message)
+        if match:
+            try:
+                return int(match.group(1))
+            except ValueError:
+                return 0
+
+    return 0
+
+
+def extract_entities(message: str) -> Dict[str, Any]:
+    entities: Dict[str, Any] = {
+        "party_size": detect_party_size(message),
+        "occasion": [],
+        "meal_period": [],
+        "beverage_interest": [],
+        "guest_need": [],
+    }
+
+    for entity_type, groups in ENTITY_PATTERNS.items():
+        for label, keywords in groups.items():
+            if any(keyword in message for keyword in keywords):
+                entities[entity_type].append(label)
+
+    return entities
+
+
+# ============================================================
+# 10. CONFIDENCE AND OPPORTUNITY DETECTION
+# ============================================================
+
+def calculate_confidence(primary_intent: str, scored_results: Dict[str, Dict[str, object]]) -> int:
+    if primary_intent not in scored_results:
+        return 35
+
+    score = int(scored_results[primary_intent]["score"])
+
+    if score >= 50:
+        return 95
+
+    if score >= 30:
+        return 85
+
+    if score >= 20:
+        return 75
+
+    if score >= 10:
+        return 62
+
+    return 40
+
+
+def detect_opportunity_type(primary_intent: str, entities: Dict[str, Any]) -> str:
+    party_size = entities.get("party_size", 0)
+    occasions = entities.get("occasion", [])
+    meal_periods = entities.get("meal_period", [])
+
+    if primary_intent == "private_event":
+        if "corporate" in occasions:
+            return "corporate_event"
+        if "birthday" in occasions:
+            return "birthday_event"
+        if party_size >= 10:
+            return "large_group_event"
+        return "private_event_inquiry"
+
+    if primary_intent == "reservation":
+        if "date_night" in occasions:
+            return "date_night_reservation"
+        if "brunch" in meal_periods:
+            return "brunch_reservation"
+        return "standard_reservation"
+
+    if primary_intent == "drinks":
+        if "happy_hour" in meal_periods:
+            return "happy_hour_discovery"
+        return "drink_menu_discovery"
+
+    if primary_intent == "menu":
+        return "menu_discovery"
+
+    return "general_guest_support"
+
+
+def build_semantic_summary(primary_intent: str, entities: Dict[str, Any], confidence: int) -> str:
+    return (
+        f"Detected intent: {primary_intent}. "
+        f"Confidence: {confidence}. "
+        f"Entities: {entities}."
+    )
+
+
+# ============================================================
+# 11. MAIN INTENT ANALYZER
 # ============================================================
 
 def analyze_guest_intent(user_message: str) -> Dict[str, object]:
-    """
-    Analyze guest intent without collecting personal information.
-
-    Returns a dictionary used by:
-    - routes/chat_routes.py
-    - services/openai_service.py
-    - frontend metadata
-    - future analytics
-    """
-
     message = normalize_message(user_message)
     scored_results = score_intents(message)
     primary_intent = choose_primary_intent(scored_results)
-
-    routing = INTENT_ROUTING.get(
-        primary_intent,
-        INTENT_ROUTING["general"]
-    )
+    routing = INTENT_ROUTING.get(primary_intent, INTENT_ROUTING["general"])
 
     matched_keywords = scored_results.get(
         primary_intent,
         {"matched_keywords": []}
     ).get("matched_keywords", [])
+
+    intent_scores = {
+        intent: int(result["score"])
+        for intent, result in scored_results.items()
+    }
+
+    entities = extract_entities(message)
+    confidence_score = calculate_confidence(primary_intent, scored_results)
+    opportunity_type = detect_opportunity_type(primary_intent, entities)
+    semantic_summary = build_semantic_summary(
+        primary_intent,
+        entities,
+        confidence_score
+    )
 
     analysis = IntentAnalysis(
         intent=primary_intent,
@@ -393,22 +444,31 @@ def analyze_guest_intent(user_message: str) -> Dict[str, object]:
         should_collect_guest_info=False,
         should_store_guest_info=False,
         should_take_reservation=False,
+        confidence_score=confidence_score,
+        intent_scores=intent_scores,
+        entities=entities,
+        opportunity_type=opportunity_type,
+        semantic_summary=semantic_summary,
     )
 
     return asdict(analysis)
 
 
 # ============================================================
-# 10. ROUTING INSTRUCTION BUILDER
+# 12. ROUTING INSTRUCTION BUILDER
 # ============================================================
 
 def build_routing_instruction(intent_analysis: Dict[str, object]) -> str:
     intent = intent_analysis.get("intent", "general")
     link = intent_analysis.get("official_link", OFFICIAL_LINKS["main_website"])
+    opportunity_type = intent_analysis.get("opportunity_type", "general_guest_support")
+    confidence_score = intent_analysis.get("confidence_score", 0)
 
     if intent == "reservation":
         return (
             "The guest appears to want a reservation. "
+            f"Detected opportunity type: {opportunity_type}. "
+            f"Confidence score: {confidence_score}. "
             "Do not take the reservation directly. "
             "Do not ask for the guest's name, phone number, email, party size, date, or time. "
             f"Politely direct them to the official OpenTable reservation link: {link}"
@@ -418,6 +478,8 @@ def build_routing_instruction(intent_analysis: Dict[str, object]) -> str:
         return (
             "The guest appears to be interested in a private event, party, large group, "
             "birthday, corporate event, holiday party, fundraiser, or similar event. "
+            f"Detected opportunity type: {opportunity_type}. "
+            f"Confidence score: {confidence_score}. "
             "Do not collect guest contact information. "
             "Do not ask for name, phone number, email, date, guest count, budget, or private details. "
             f"Politely direct them to the official Parkside Tavern private events inquiry form: {link}"
@@ -426,6 +488,8 @@ def build_routing_instruction(intent_analysis: Dict[str, object]) -> str:
     if intent in ["menu", "drinks", "hours", "location", "sports"]:
         return (
             "The guest is asking for restaurant information. "
+            f"Detected opportunity type: {opportunity_type}. "
+            f"Confidence score: {confidence_score}. "
             "Answer using official Parkside Tavern knowledge when available. "
             "Do not invent details. "
             f"When helpful, direct them to the official Parkside Tavern website: {link}"
@@ -447,7 +511,7 @@ def build_routing_instruction(intent_analysis: Dict[str, object]) -> str:
 
 
 # ============================================================
-# 11. FRONTEND QUICK ACTIONS
+# 13. FRONTEND QUICK ACTIONS
 # ============================================================
 
 def get_quick_action_for_intent(intent_analysis: Dict[str, object]) -> Dict[str, str]:
@@ -468,6 +532,20 @@ def get_quick_action_for_intent(intent_analysis: Dict[str, object]) -> Dict[str,
             "type": "external_link",
         }
 
+    if intent == "drinks":
+        return {
+            "label": "View Drink Information",
+            "url": link,
+            "type": "external_link",
+        }
+
+    if intent == "menu":
+        return {
+            "label": "View Menu Information",
+            "url": link,
+            "type": "external_link",
+        }
+
     return {
         "label": "Visit Parkside Tavern Website",
         "url": link,
@@ -476,11 +554,7 @@ def get_quick_action_for_intent(intent_analysis: Dict[str, object]) -> Dict[str,
 
 
 # ============================================================
-# 12. BACKWARD-COMPATIBILITY ALIASES
-# ============================================================
-#
-# These prevent old imports from crashing while we finish Phase 3.
-# They do NOT collect or save guest information.
+# 14. BACKWARD-COMPATIBILITY ALIASES
 # ============================================================
 
 def analyze_lead_intent(user_message: str) -> Dict[str, object]:
