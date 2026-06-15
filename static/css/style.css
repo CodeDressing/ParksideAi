@@ -815,7 +815,7 @@ button:hover,
 .bot-message,
 .user-message {
 
-    width: fit-content;
+    width: auto;
     max-width: 88%;
 
     margin-bottom: 16px;
@@ -841,8 +841,11 @@ button:hover,
 
 .bot-message {
 
-    margin-right:
-        auto;
+    margin-right: auto;
+
+    text-align: left;
+
+    display: block;
 
     background:
         rgba(255,255,255,0.06);
