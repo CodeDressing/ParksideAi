@@ -1,7 +1,8 @@
 """
 ============================================================
 ParksideAI Application Factory
-Phase 6 Part 3.0
+Phase 7 Part 3.1A
+Enterprise Analytics Blueprint Registration Upgrade
 ============================================================
 
 Responsibilities:
@@ -11,7 +12,8 @@ Responsibilities:
 - initialize rate limiting
 - register application blueprints
 - register search engine infrastructure
-- expose health checks
+- register analytics infrastructure safely
+- expose production health checks
 ============================================================
 """
 
@@ -92,7 +94,7 @@ def create_app():
     limiter.init_app(app)
 
     # --------------------------------------------------------
-    # SUBSECTION 3.5 — BLUEPRINT IMPORTS
+    # SUBSECTION 3.5 — CORE BLUEPRINT IMPORTS
     # --------------------------------------------------------
 
     from routes.main_routes import main_bp
@@ -101,7 +103,7 @@ def create_app():
     from routes.search_engine_routes import search_engine_bp
 
     # --------------------------------------------------------
-    # SUBSECTION 3.6 — BLUEPRINT REGISTRATION
+    # SUBSECTION 3.6 — CORE BLUEPRINT REGISTRATION
     # --------------------------------------------------------
 
     app.register_blueprint(
@@ -123,7 +125,29 @@ def create_app():
     )
 
     # --------------------------------------------------------
-    # SUBSECTION 3.7 — HEALTH CHECK
+    # SUBSECTION 3.7 — ANALYTICS BLUEPRINT REGISTRATION
+    # --------------------------------------------------------
+
+    analytics_routes_registered = False
+
+    try:
+        from routes.analytics_routes import analytics_bp
+
+        app.register_blueprint(
+            analytics_bp,
+            url_prefix="/analytics"
+        )
+
+        analytics_routes_registered = True
+
+    except ImportError as error:
+        print(
+            "ANALYTICS BLUEPRINT NOT REGISTERED:",
+            error
+        )
+
+    # --------------------------------------------------------
+    # SUBSECTION 3.8 — HEALTH CHECK
     # --------------------------------------------------------
 
     @app.route("/health")
@@ -144,11 +168,14 @@ def create_app():
                 "no_guest_data_collection",
 
             "search_engine_routes":
-                "registered"
+                "registered",
+
+            "analytics_routes_registered":
+                analytics_routes_registered
         }
 
     # --------------------------------------------------------
-    # SUBSECTION 3.8 — RETURN APP
+    # SUBSECTION 3.9 — RETURN APP
     # --------------------------------------------------------
 
     return app
