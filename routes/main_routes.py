@@ -19,12 +19,17 @@ Responsibilities:
 # SECTION 1 — IMPORTS
 # ============================================================
 
+import hashlib
+import json
+from datetime import datetime
+from pathlib import Path
+
 from flask import Blueprint
+from flask import jsonify
 from flask import render_template
+from flask import request
 
 from config.settings import settings
-
-
 # ============================================================
 # SECTION 2 — BLUEPRINT SETUP
 # ============================================================
@@ -36,45 +41,53 @@ main_bp = Blueprint(
 
 
 # ============================================================
-# SECTION 3 — GLOBAL PLATFORM CONTEXT
+# SECTION 3.5 — PRIVACY-SAFE ANALYTICS CONFIG
 # ============================================================
 
-GLOBAL_PLATFORM_CONTEXT = {
+ANALYTICS_LOG_PATH = Path("data/analytics_events.jsonl")
 
-    "platform_name":
-        settings.APP_NAME,
-
-    "restaurant_name":
-        settings.RESTAURANT_NAME,
-
-    "city":
-        settings.RESTAURANT_CITY,
-
-    "state":
-        settings.RESTAURANT_STATE,
-
-    "official_links": {
-
-        "website":
-            settings.OFFICIAL_MAIN_WEBSITE,
-
-        "reservations":
-            settings.OFFICIAL_RESERVATION_LINK,
-
-        "private_events":
-            settings.OFFICIAL_PRIVATE_EVENTS_LINK,
-
-        "food_menu":
-            settings.OFFICIAL_FOOD_MENU_LINK,
-
-        "drink_menu":
-            settings.OFFICIAL_DRINK_MENU_LINK
-    },
-
-    "privacy_mode":
-        settings.PRIVACY_MODE
+ALLOWED_ANALYTICS_EVENTS = {
+    "page_viewed",
+    "time_on_page",
+    "button_clicked",
+    "chat_opened",
+    "chat_minimized",
+    "chat_message_sent",
+    "opentable_clicked",
+    "private_events_clicked",
+    "food_menu_clicked",
+    "drink_menu_clicked"
 }
 
+
+def utc_now():
+    return datetime.utcnow().isoformat()
+
+
+def get_anonymous_ip_hash():
+    raw_ip = (
+        request.headers.get("X-Forwarded-For", "")
+        .split(",")[0]
+        .strip()
+        or request.remote_addr
+        or "unknown"
+    )
+
+    return hashlib.sha256(raw_ip.encode("utf-8")).hexdigest()[:24]
+
+
+def sanitize_analytics_text(value, max_length=500):
+    if value is None:
+        return ""
+
+    return str(value).strip()[:max_length]
+
+
+def write_analytics_event(event_payload):
+    ANALYTICS_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+    with ANALYTICS_LOG_PATH.open("a", encoding="utf-8") as file:
+        file.write(json.dumps(event_payload, ensure_ascii=False) + "\n")
 
 # ============================================================
 # SECTION 4 — HOMEPAGE SEO DATA
@@ -447,3 +460,111 @@ def health():
         "privacy_mode":
             settings.PRIVACY_MODE
     }
+
+# ============================================================
+# SECTION 13 — ANALYTICS EVENT INGESTION
+# ============================================================
+
+@main_bp.route("/analytics/event", methods=["POST"])
+def analytics_event():
+    """
+    Privacy-safe visitor analytics endpoint.
+
+    Tracks anonymous site behavior without collecting:
+    - names
+    - emails
+    - phone numbers
+    - payment details
+    - reservation details
+    - private booking details
+    """
+
+    data = request.get_json(silent=True) or {}
+
+    event_type = sanitize_analytics_text(data.get("event_type"), 100)
+
+    if event_type not in ALLOWED_ANALYTICS_EVENTS:
+        return jsonify({
+            "success": False,
+            "error": "unsupported_event_type"
+        }), 400
+
+    event_payload = {
+        "event_type": event_type,
+        "timestamp": utc_now(),
+        "anonymous_session_id": sanitize_analytics_text(
+            data.get("anonymous_session_id"),
+            120
+        ),
+        "page_url": sanitize_analytics_text(
+            data.get("page_url"),
+            500
+        ),
+        "page_title": sanitize_analytics_text(
+            data.get("page_title"),
+            200
+        ),
+        "referrer": sanitize_analytics_text(
+            data.get("referrer"),
+            500
+        ),
+        "device": {
+            "user_agent": sanitize_analytics_text(
+                request.headers.get("User-Agent"),
+                500
+            ),
+            "browser_language": sanitize_analytics_text(
+                data.get("browser_language"),
+                80
+            ),
+            "screen_width": data.get("screen_width"),
+            "screen_height": data.get("screen_height")
+        },
+        "engagement": {
+            "time_on_page_seconds": data.get("time_on_page_seconds"),
+            "button_label": sanitize_analytics_text(
+                data.get("button_label"),
+                120
+            ),
+            "button_url": sanitize_analytics_text(
+                data.get("button_url"),
+                500
+            )
+        },
+        "privacy": {
+            "raw_ip_stored": False,
+            "anonymous_ip_hash": get_anonymous_ip_hash(),
+            "personal_information_collected": False
+        }
+    }
+
+    write_analytics_event(event_payload)
+
+    return jsonify({
+        "success": True,
+        "event_type": event_type
+    })
+
+
+# ============================================================
+# SECTION 14 — ANALYTICS HEALTH CHECK
+# ============================================================
+
+@main_bp.route("/analytics/health")
+def analytics_health():
+    """
+    Analytics system health check.
+    """
+
+    return jsonify({
+        "success": True,
+        "service": "ParksideAI Privacy-Safe Analytics",
+        "status": "online",
+        "log_path": str(ANALYTICS_LOG_PATH),
+        "allowed_events": sorted(ALLOWED_ANALYTICS_EVENTS),
+        "privacy_mode": {
+            "raw_ip_stored": False,
+            "personal_information_collected": False
+        },
+        "timestamp": utc_now()
+    })
